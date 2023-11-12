@@ -1,0 +1,178 @@
+*{
+    box-sizing: border-box;
+}
+
+body{
+    background-color: #F3F5F6;
+    font-family: 'DINPro-Bold', sans-serif;
+}
+
+.navbar-wrapper{
+    position: relative;
+}
+
+.product-detail-wrapper{
+    padding: 48px;
+}
+
+.image-holder{
+    overflow: hidden;
+    border: 10px;
+}
+
+.image-holder img{
+    object-fit: cover;
+    width: 100%;
+}
+
+.product-detail{
+    font-family: 'DINPro-Medium', sans-serif;
+    color: #1A1A1A;
+    font-size: 1rem;
+}
+
+.product-category{
+    display: block;
+    font-family: 'DINPro-Medium', sans-serif;
+    color: #1A1A1A;
+    font-size: 0.95rem;
+    opacity: .7;
+    text-decoration: none;
+    transition: all 0.25s ease;
+}
+
+.product-category:hover{
+    opacity: .9;
+    transition: all 0.25s ease;
+}
+
+.product-name{
+    font-family: 'DINPro-Bold', sans-serif;
+    color: #1A1A1A;
+    font-size: 2.25rem;
+    line-height: 1.15;
+}
+
+.product-price{ 
+    color: #E74C3C;
+    font-size: 1.25rem;
+}
+
+.stock-warning{
+    color: #E74C3C;
+}
+
+.quantity-selector .quantity-tag{
+    font-family: 'DINPro-Medium', sans-serif;
+    color: #1A1A1A;
+    opacity: .7;
+}
+
+.quantity-btn-group{
+    height: 50px;
+    width: 150px;
+    overflow: hidden;
+    border-radius: 25px;
+    border: solid rgba(26, 26, 26, .38);
+    border-width: 1.5px;
+    background: none;
+}
+
+.quantity-btn-group .minus-btn{
+    width: 50px;
+    height: 50px;
+    border: none;
+    background: none;
+}
+
+.quantity-btn-group .plus-btn{
+    width: 50px;
+    height: 50px;
+    border: none;
+    background: none;
+}
+
+.quantity-btn-group .quantity{
+    width: 50px;
+    height: 50px;
+    border: none;
+    background: none;
+    text-align: center;
+}
+
+.quantity-btn-group .quantity:focus-visible{
+    outline: none;
+}
+
+.product-detail .add-btn{
+        width: 100%;
+        height: 60px;
+        background-color: rgba(254, 216, 47, 1);
+        font-family: 'DINPro-Bold', sans-serif;
+        color: #FFFFFF;
+        border: none;
+        border-radius: 30px;
+        transition: all 0.25s ease;
+}
+
+.product-detail .add-btn:hover{
+    background-color: rgba(254, 216, 47, .85);
+    transition: all 0.25s ease;
+}
+
+.share-btn{
+    border: none;
+    background: none;
+    opacity: .7;
+    transition: all 0.25s ease;
+}
+
+.share-btn:hover{
+    opacity: 1;
+    transition: all 0.25s ease;
+}
+
+.section-wrapper{
+    padding: 0 48px 96px;
+}
+
+.heading .heading-title{
+    color: #1A1A1A;
+    font-size: 2.25rem;
+}
+
+.heading .view-all-link{
+    text-decoration: none;
+}
+
+.heading .view-all-text{
+    font-family: 'DINPro-Medium', sans-serif;
+    color: #1A1A1A;
+    font-size: 1rem;
+    opacity: .9;
+}
+
+@media (max-width: 992px){
+    .heading{
+        flex-direction: column;
+        align-items: start;
+    }
+    .heading-title{
+        display: block;
+    }
+}
+
+@media (max-width: 768px){
+    .product-detail-wrapper{
+        padding: 0 20px 48px;
+    }
+    .section-wrapper{
+        padding: 0 20px 48px;
+    }
+    .heading .heading-title{
+        font-size: 1.5rem;
+    }
+    .heading .view-all-text{
+        font-size: 0.9rem
+    }
+}
