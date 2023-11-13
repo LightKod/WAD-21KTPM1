@@ -6,8 +6,9 @@ var logger = require('morgan');
 var expressLayouts = require('express-ejs-layouts')
 
 
-var indexRouter = require('./routes/index');
-var usersRouter = require('./routes/users');
+var homeRouter = require('./components/user/home/home.router');
+var productsRouter = require('./components/user/product/product.router');
+var cartRouter = require('./components/user/cart/cart.router');
 
 //Admin Routers
 var adminDashboardRouter = require('./components/admin/dashboard');
@@ -31,11 +32,13 @@ app.use(express.static(path.join(__dirname, 'public')));
 //app.use("/public", express.static(path.join(__dirname, 'public')));
 
 
-app.use('/', indexRouter);
-app.use('/users', usersRouter);
 app.use('/admin/dashboard', adminDashboardRouter);
 app.use('/admin/login', adminLoginRouter);
 app.use('/admin/register', adminRegisterRouter);
+
+app.use('/', homeRouter);
+app.use('/products', productsRouter);
+app.use('/cart', cartRouter);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
