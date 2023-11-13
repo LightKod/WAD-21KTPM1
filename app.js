@@ -9,7 +9,7 @@ var expressLayouts = require('express-ejs-layouts')
 var homeRouter = require('./components/user/home/home.router');
 var productsRouter = require('./components/user/product/product.router');
 var cartRouter = require('./components/user/cart/cart.router');
-
+var loginRouter = require('./components/user/login/login.router');
 //Admin Routers
 var adminDashboardRouter = require('./components/admin/dashboard');
 var adminLoginRouter = require('./components/admin/login');
@@ -40,7 +40,7 @@ app.use('/admin/card', adminCardListRouter);
 app.use('/', homeRouter);
 app.use('/products', productsRouter);
 app.use('/cart', cartRouter);
-
+app.use('/login', loginRouter);
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
   next(createError(404));
