@@ -14,6 +14,7 @@ var cartRouter = require('./components/user/cart/cart.router');
 var adminDashboardRouter = require('./components/admin/dashboard');
 var adminLoginRouter = require('./components/admin/login');
 var adminRegisterRouter = require('./components/admin/register');
+var adminCardListRouter = require('./components/admin/card');
 
 var app = express();
 
@@ -29,12 +30,13 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
-//app.use("/public", express.static(path.join(__dirname, 'public')));
+app.use("/public", express.static(path.join(__dirname, 'public')));
 
 
 app.use('/admin/dashboard', adminDashboardRouter);
 app.use('/admin/login', adminLoginRouter);
 app.use('/admin/register', adminRegisterRouter);
+app.use('/admin/card', adminCardListRouter);
 
 app.use('/', homeRouter);
 app.use('/products', productsRouter);
