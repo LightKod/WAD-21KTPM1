@@ -15,7 +15,7 @@ var adminDashboardRouter = require('./components/admin/dashboard');
 var adminLoginRouter = require('./components/admin/login');
 var adminRegisterRouter = require('./components/admin/register');
 var adminCardListRouter = require('./components/admin/card');
-
+var adminUserListRouter = require('./components/admin/userManagement');
 var app = express();
 
 // view engine setup
@@ -36,6 +36,7 @@ app.use('/admin/dashboard', adminDashboardRouter);
 app.use('/admin/login', adminLoginRouter);
 app.use('/admin/register', adminRegisterRouter);
 app.use('/admin/card', adminCardListRouter);
+app.use('/admin/user', adminUserListRouter);
 
 app.use('/', homeRouter);
 app.use('/products', productsRouter);
