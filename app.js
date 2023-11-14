@@ -36,6 +36,7 @@ app.use('/admin/dashboard', adminDashboardRouter);
 app.use('/admin/login', adminLoginRouter);
 app.use('/admin/register', adminRegisterRouter);
 app.use('/admin/card', adminCardListRouter);
+app.use('/admin/card/edit', adminCardListRouter);
 app.use('/admin/user', adminUserListRouter);
 
 app.use('/', homeRouter);

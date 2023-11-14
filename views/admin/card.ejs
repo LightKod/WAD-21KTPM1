@@ -1,8 +1,17 @@
 <!-- Begin Page Content -->
 <div class="container-fluid">
   <!-- Page Heading -->
-  <h1 class="h3 mb-2 text-gray-800">Card List</h1>
-  </p>
+  <div class="row d-flex justify-content-between mb-4">
+    <h1 class="h3 mb-2 text-gray-800 col">Card List</h1>
+    <div class="col d-flex justify-content-end">
+      <a href="card/add" class="btn btn-success btn-icon-split">
+        <span class="icon text-white-50">
+          <i class="fas fa-plus"></i>
+        </span>
+        <span class="text">Add</span>
+      </a>
+    </div>
+  </div>
 
   <!-- DataTales Example -->
   <div class="card shadow mb-4">
@@ -13,7 +22,7 @@
       <div class="table-responsive">
         <table
           class="table table-bordered"
-          id="dataTable"
+          id="table-card"
           width="100%"
           cellspacing="0"
         >
@@ -25,6 +34,7 @@
               <th>SetID</th>
               <th>Price</th>
               <th>Amount</th>
+              <th>Action</th>
             </tr>
           </thead>
           <!-- <tfoot>
@@ -45,6 +55,14 @@
               <td>xy1</td>
               <td>$3.32</td>
               <td>10</td>
+              <td class="">
+                <a href="#" class="btn btn-warning btn-circle btn-sm">
+                  <i class="fas fa-cog"></i>
+                </a>
+                <a href="#" class="btn btn-danger btn-circle btn-sm">
+                  <i class="fas fa-ban"></i>
+                </a>
+              </td>
             </tr>
             <tr>
               <td>xy1-29</td>
@@ -53,6 +71,14 @@
               <td>xy1</td>
               <td>$4.0</td>
               <td>10</td>
+              <td>
+                <a href="card/edit" class="btn btn-warning btn-circle btn-sm">
+                  <i class="fas fa-cog"></i>
+                </a>
+                <a href="" class="btn btn-danger btn-circle btn-sm">
+                  <i class="fas fa-ban"></i>
+                </a>
+              </td>
             </tr>
           </tbody>
         </table>
