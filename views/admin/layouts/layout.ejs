@@ -36,11 +36,9 @@
 
     <!-- Custom styles for this template-->
     <link href="/css/sb-admin-2.min.css" rel="stylesheet" />
-    <link
-      href="/vendor/datatables/dataTables.bootstrap4.min.css"
-      rel="stylesheet"
-    />
-    <link href="/styles/table.css" rel="stylesheet" />
+    <% if (styles) { %> <% styles.forEach(style => { %>
+    <link rel="stylesheet" href="<%= style %>" />
+    <% }); %> <% } %>
   </head>
 
   <body id="page-top">
@@ -79,11 +77,9 @@
     <!-- Custom scripts for all pages-->
     <script src="/js/sb-admin-2.min.js"></script>
 
-    <script src="/vendor/datatables/jquery.dataTables.min.js"></script>
-    <script src="/vendor/datatables/dataTables.bootstrap4.min.js"></script>
-
     <!-- Page level custom scripts -->
-    <script src="/js/table.js"></script>
-    <script src="/js/datatables/table-card.js"></script>
+    <% if (scripts) { %> <% scripts.forEach(script => { %>
+    <script src="<%= script %>"></script>
+    <% }); %> <% } %>
   </body>
 </html>
