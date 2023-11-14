@@ -7,7 +7,7 @@ router.get('/', function(req, res, next) {
 })
 router.get('/detail', function(req, res, next) {
   const scripts = [
-    '/scripts/detail.js"',
+    '/scripts/product-detail.js',
   ];
   const styles = [
     "/styles/product-detail.css"
