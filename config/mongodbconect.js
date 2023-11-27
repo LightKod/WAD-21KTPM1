@@ -1,6 +1,6 @@
 const mongoose = require('mongoose');
 
-const connect=async () => mongoose.connect('mongodb://localhost:27017/midterm', {
+const connect= async () => mongoose.connect('mongodb+srv://tminhkhoa91:jA2kXctn56WD2ST6@cluster0.bbqd7fl.mongodb.net/', {
     useNewUrlParser: true,
     useUnifiedTopology: true
 })
