@@ -4,8 +4,8 @@ const router = express.Router();
 /* GET home page. */
 router.get('/', function(req, res, next) {
   console.log(req.query)
-  res.send('congratulate')
-  // res.render('user/product-page');
+  // res.send('congratulate')
+  res.render('user/product-page');
 })
 router.get('/detail', function(req, res, next) {
   const scripts = [

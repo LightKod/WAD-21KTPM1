@@ -22,7 +22,7 @@ router.post('/', function (req, res, next) {
     // NEED TO CALL req.login()!!!
     req.login(user, function(err) {
       if (err) { return next(err); }
-      return res.redirect('/');
+      return res.redirect('/account');
     });
   })(req, res, next);
 }

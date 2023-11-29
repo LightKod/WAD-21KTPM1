@@ -50,8 +50,10 @@ signIn.addEventListener('submit', (event) => {
     body: JSON.stringify(formData),
   })
   .then(response => {
-    return response.text();
-    // window.location.href = response.url;
+    if(!response.ok) {
+      return response.text();
+    }
+    return window.location.href = response.url;
   })
   .then(data => {
     console.log('Response from server:', data);
