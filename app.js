@@ -45,7 +45,7 @@ app.use(passport.initialize());
 app.use(passport.session());
 require('./config/passportConfig')
 
-app.use('/admin/dashboard', adminDashboardRouter);
+app.use('/admin/dashboard',adminDashboardRouter);
 app.use('/admin/login', adminLoginRouter);
 app.use('/admin/register', adminRegisterRouter);
 app.use('/admin/card', adminCardListRouter);

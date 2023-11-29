@@ -54,6 +54,7 @@ passport.use('local-login', new LocalStrategy({
     // Kiểm tra xem người dùng có tồn tại không
     User.findOne({ 'id': id }).then((user) => {
       if (!user) {
+        console.log('Tài Khoảng không tồn tại.');
         return done(null, false, { message: 'Tài Khoảng không tồn tại.' });
       }
       if (!bcrypt.compareSync(password, user.password)) {
