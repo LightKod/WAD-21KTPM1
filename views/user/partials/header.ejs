@@ -326,30 +326,43 @@
     </div>
   </div>
 
-  <!-- Search Offcanvas -->
-  <div
-    class="offcanvas offcanvas-end"
-    tabindex="-1"
-    id="searchOffcanvas"
-    aria-labelledby="offcanvasLabel2"
-  >
-    <div class="offcanvas-header">
-      <h5 class="offcanvas-title" id="offcanvasLabel2">Search</h5>
-      <button
-        type="button"
-        class="btn-close"
-        data-bs-dismiss="offcanvas"
-        aria-label="Close"
-      ></button>
-    </div>
-    <div class="offcanvas-body">
-      <form action="#">
-        <input
-          class="form-control form-control-lg"
-          type="text"
-          placeholder="Search for:"
-        />
+<!-- Search Offcanvas -->
+<div class="offcanvas search-offcanvas offcanvas-end" tabindex="-1" id="searchOffcanvas" aria-labelledby="offcanvasLabel2">
+  <div class="offcanvas-header">
+      <form>
+          <input id="offcanvasSearchInput" type="text" placeholder="Search for..." autocomplete="off">
       </form>
-    </div>
+      <button type="button" id="offcanvasSearchClear" class="clear-btn">Clear</button>
+      <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
   </div>
+  <div id="searchResultContainer" class="offcanvas-body vstack gap-4">
+      <!-- SEARCH RESULT -->
+      <!-- <a href="/products/id" class="w-100 hstack gap-4 align-items-center">
+          <img src="https://images.pokemontcg.io/xy1/1_hires.png" alt="Product Image" class="search-result-img">
+          <div class="vstack gap-2 justify-content-center">
+              <span class="search-result-supertype">Pokémon</span>
+              <span class="search-result-name">Pokémon Card Game Bulbasaur - Vending series</span>
+              <span class="search-result-price">211.990₫</span>
+          </div>
+      </a> -->
+
+      <!-- PLACEHOLDER, APPEARS WHILE WAITING FOR SEARCH RESULT -->
+      <!-- <div class="w-100 hstack gap-4 align-items-center" aria-hidden="true">
+          <div class="img-placeholder placeholder-glow">
+              <span class="placeholder col-12 h-100"></span>
+          </div>
+          <div class="vstack gap-2 justify-content-center">
+              <div class="placeholder-glow">
+                  <span class="text-placeholder placeholder col-3 placeholder-sm"></span>
+              </div>
+              <div class="placeholder-glow">
+                  <span class="text-placeholder placeholder col-12"></span>
+              </div>
+              <div class="placeholder-glow">
+                  <span class="text-placeholder placeholder col-4"></span>
+              </div>
+          </div>
+      </div> -->
+  </div>
+</div>
 </header>

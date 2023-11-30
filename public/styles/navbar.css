@@ -63,18 +63,22 @@
 
 /* Override Bootstrap classes */
 
-.offcanvas-header{
-    padding: 20px 20px;
+.offcanvas{
+    border-radius: 10px;
 }
 
-.offcanvas-title{
+.offcanvas-header{
+    padding: 32px 32px 0;
+}
+
+#navbarOffcanvas .offcanvas-title{
     font-family: 'DINPro-Bold', sans-serif;
     color: #1A1A1A;
     font-size: 2.5rem;
 }
 
 .offcanvas-body{
-    padding: 20px 20px;
+    padding: 32px;
 }
 
 .offcanvas-body a{
@@ -86,8 +90,88 @@
     font-size: 1.5rem;
 }
 
-.form-control{
-    font-size: 1rem;
+.search-offcanvas {
+    --bs-offcanvas-width: min(95vw, 650px) !important;
+}
+
+.search-offcanvas form{
+    width: 80%;
+}
+
+.search-offcanvas input{
+    font-size: 1.4rem;
+    width: 100%;
+    color: #1A1A1A;
+    border: none;
+}
+
+.search-offcanvas input:focus{
+    outline: none;
+    border: none;
+}
+
+.search-offcanvas input::placeholder{
+    opacity: .85;
+}
+
+.search-offcanvas .offcanvas-header{
+    margin: 32px 40px 0;
+    padding: 0 0 12px;
+    position: relative;
+    border-bottom: 2px solid rgba(26, 26, 26, .1);
+    transition: all 0.25s ease;
+}
+
+.search-offcanvas .clear-btn{
+    border: none;
+    background: none;
+    font-family: 'DINPro-Medium', sans-serif;
+    color: #1A1A1A;
+    opacity: 0;
+    transition: all 0.25s ease;
+}
+
+.btn-close:focus{
+    box-shadow: none;
+}
+
+.search-offcanvas .offcanvas-body{
+    padding: 0 40px 40px 40px;
+    margin: 32px 0 0 0;
+}
+
+.search-result-img{
+    width: 96px;
+}
+
+.search-result-supertype{
+    font-family: 'DINPro-Medium', sans-serif;
+    font-size: 12px;
+    color: #1A1A1AB3;
+}
+
+.search-result-name{
+    font-size: 16px;
+    color: #1A1A1A;
+    line-height: 1.5rem;
+}
+
+.search-result-price{
+    font-family: 'DINPro-Medium', sans-serif;
+    font-size: 16px;
+    color: #E74C3C;
+}
+
+.img-placeholder{
+    width: 96px;
+    height: 96px;
+    border-radius: 8px;
+    overflow: hidden;
+}
+
+.text-placeholder{
+    border-radius: 4px;
+    overflow: hidden;
 }
 
 @media (max-width: 992px) {

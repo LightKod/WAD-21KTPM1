@@ -35,7 +35,7 @@ const overlays = [...document.querySelectorAll('.overlay')]
 
 //Initialize image slider's indicators
 document.querySelector('.indicators').innerHTML = images.map((element, index) => {
-    return `<button type="button" class="indicator-btn" onclick="handleSlideTo(event, ${index})">${index + 1}</button>`
+    return `<button type="button" class="indicator-btn" onclick="handleSlideTo(event, ${index})" onmouseover="handleHover(event)">${index + 1}</button>`
 }).join('')
 
 const indicators = [...document.querySelectorAll('.indicator-btn')]
@@ -48,9 +48,16 @@ addClassToAllChildren(overlays[0], 'overlay-text-appear')
 i = 0;
 max_i = images.length
 
+var custom_cursor = document.querySelector('.custom-cursor')
+
 function handleSlideTo(event, index) {
     event.stopPropagation()
     slideTo(index)
+}
+
+function handleHover(event) {
+    event.stopPropagation()
+    custom_cursor.style.display = 'none'
 }
 
 function slideTo(index) {
@@ -103,6 +110,28 @@ image_container.addEventListener('click', (e) => {
     else{
         slideTo((i + 1 ) % max_i)
     }
+})
+
+image_container.addEventListener('mousemove', (e) => {
+    const clickX = e.clientX - image_container.getBoundingClientRect().left
+    const clickY = e.clientY - image_container.getBoundingClientRect().top
+    custom_cursor.style.translate = (clickX - 25) + 'px '+ (clickY - 25) + 'px'
+    const divWidth = image_container.clientWidth
+
+    if(clickX < divWidth / 2){
+        custom_cursor.children[0].style.transform = 'rotate(180deg)'
+    }
+    else{
+        custom_cursor.children[0].style.transform = 'rotate(0deg)'
+    }
+})
+
+image_container.addEventListener('mouseover', (e) => {
+    custom_cursor.style.display = 'flex'
+})
+
+image_container.addEventListener('mouseleave', (e) => {
+    custom_cursor.style.display = 'none'
 })
 
 // setInterval(function() {
