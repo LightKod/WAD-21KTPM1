@@ -12,8 +12,7 @@ var cartRouter = require('./components/user/cart/cart.router');
 var loginRouter = require('./components/user/login/login.router');
 //Admin Routers
 var adminDashboardRouter = require('./components/admin/dashboard');
-var adminLoginRouter = require('./components/admin/login');
-var adminRegisterRouter = require('./components/admin/register');
+var adminAuthRoute = require('./components/admin/auth');
 var adminCardListRouter = require('./components/admin/card');
 var adminUserListRouter = require('./components/admin/userManagement');
 var app = express();
@@ -33,8 +32,7 @@ app.use("/public", express.static(path.join(__dirname, 'public')));
 
 
 app.use('/admin/dashboard', adminDashboardRouter);
-app.use('/admin/login', adminLoginRouter);
-app.use('/admin/register', adminRegisterRouter);
+app.use('/admin', adminAuthRoute);
 app.use('/admin/card', adminCardListRouter);
 app.use('/admin/card/edit', adminCardListRouter);
 app.use('/admin/user', adminUserListRouter);
