@@ -3,6 +3,8 @@ const router = express.Router();
 
 /* GET home page. */
 router.get('/', function(req, res, next) {
+  console.log('home')
+  console.log(req.user)
   const scripts = [
     '/scripts/landing-page.js',
   ];

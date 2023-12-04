@@ -1,10 +1,8 @@
 const express = require('express');
 const router = express.Router();
-
+const ProductController = require('./product.controler');
 /* GET home page. */
-router.get('/', function(req, res, next) {
-  res.render('user/product-page');
-})
+router.get('/', ProductController.getProducts);
 router.get('/detail', function(req, res, next) {
   const scripts = [
     '/scripts/product-detail.js',
