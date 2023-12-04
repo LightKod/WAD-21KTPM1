@@ -3,7 +3,7 @@ const passport = require('passport');
 const LocalStrategy = require('passport-local');
 const bcrypt = require('bcrypt');
 const crypto = require('crypto');
-const User = require('../models/user');
+const User = require('../models/User');
 // Kích hoạt và sử dụng Passport trong ứng dụng
 
 function generateUniqueId(email) {

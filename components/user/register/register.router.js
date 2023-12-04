@@ -3,7 +3,7 @@ const passport = require('passport');
 const bcrypt = require('bcrypt');
 const crypto = require('crypto');
 const router = express.Router();
-const User = require('../../../models/user');
+const User = require('../../../models/User');
 function generateUniqueId(email) {
     return crypto.createHash('sha256').update(email).digest('hex');
   }

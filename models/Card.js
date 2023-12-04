@@ -4,9 +4,12 @@ const cardSchema = new mongoose.Schema({
     name: { type: String, required: true },
     supertype: { type: String, required: true },
     types: { type: String, required: true },
-    set_id: { type: String, ref: 'Set' },
-    market_prices: { type: Number, required: true },
-    amount: { type: Number, required: true },
+    updatedAt: { type: Date, default: Date.now },
+    rarity: { type: String, required: true },
+    setId: { type: String, ref: 'Set' },
+    image: { type: String, required: true },
+    marketPrices: { type: Number, required: true },
+    amount: { type: Number, default: 10 },
   });
 const Card = mongoose.model('Card', cardSchema);
 module.exports = Card
