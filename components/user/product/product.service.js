@@ -1,13 +1,16 @@
 const Card = require('../../../models/Card');
-exports.getProductsByFilter = async (filterString, page = 1, perPage = 24, sort = { updateAt: 1 }) => {
+exports.getProductsByFilter = async (filterString, page = 1, perPage = 24, sortString) => {
   try {
     const filters = JSON.parse(filterString||'{}');
     console.log(filters)
-    const allFilteredProducts = await Card.find(filters).sort(sort);
+    const sortSelect = JSON.parse(sortString||'{"name":"Date, new to old","updateAt":-1}');
+    const {name:sortName,...sortMethod}=sortSelect
+    console.log(sortSelect)
+    const allFilteredProducts = await Card.find(filters).sort(sortMethod);
     const allCard = await Card.find();
     const skip = (page - 1) * perPage;
     const filteredProducts = allFilteredProducts.slice(skip, skip + perPage);
-
+    // console.log(filteredProducts)
     // Tính số lượng thẻ bài theo từng loại "rarity"
     const rarityCounts = [];
     allCard.forEach(card => {
@@ -33,10 +36,12 @@ exports.getProductsByFilter = async (filterString, page = 1, perPage = 24, sort 
     // console.log(filteredProducts);
     // console.log(rarityCounts);
     // console.log(totalPages);
+    
     return {
       products: filteredProducts,
       rarityCounts: rarityCounts,
-      totalPages: totalPages
+      totalPages: totalPages,
+      sortName: sortName
     };
   } catch (error) {
     throw new Error('Error fetching filtered products from database: ' + error.message);

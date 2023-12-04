@@ -54,7 +54,36 @@ function updateProducts() {
     page=quantityFields.value
     // Tạo URL mới với các bộ lọc được áp dụng
     const selectedRarity = [];
-
+    const selectedSort=selectedSortOption.textContent
+    console.log(selectedSort)
+    if(selectedSort =='Date, new to old')
+    {
+        sort = {
+            name:'Date, new to old',
+            updateAt: -1
+        }
+    }
+    else if(selectedSort =='Date, old to new')
+    {
+        sort = {
+            name:'Date, old to new',
+            updateAt: 1
+        }
+    }
+    else if(selectedSort =='Price, low to high')
+    {
+        sort = {
+            name:'Price, low to high',
+            marketPrices: 1
+        }
+    }
+    else if(selectedSort =='Price, high to low')
+    {
+        sort = {
+            name:'Price, high to low',
+            marketPrices: -1
+        }
+    }
   // Lặp qua tất cả các checkbox
   checkboxes.forEach(checkbox => {
     if (checkbox.checked) {
@@ -113,11 +142,10 @@ checkboxes.forEach(checkbox => {
     dropdownMenu.addEventListener('click', function(event) {
       if (event.target.classList.contains('dropdown-item')) {
         event.preventDefault();
-        const selectedValue = event.target.getAttribute('data-value');
         selectedSortOption.textContent = event.target.textContent;
-        
+        updateProducts();
         // Xử lý selectedValue tùy theo giá trị được chọn
-        console.log('Giá trị đã chọn:', selectedValue);
+        // console.log('Giá trị đã chọn:', selectedValue);
         
         // Thực hiện các hành động khác dựa trên giá trị đã chọn
       }

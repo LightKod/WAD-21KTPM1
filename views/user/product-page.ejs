@@ -496,7 +496,7 @@
                 aria-controls="selectedSortOption"
               >
                 <span id="selectedSortOption" class="reversed-link"
-                  >Date, new to old</span
+                  ><%= sortName %></span
                 >
                 <span class="circle-chevron rounded-circle"
                   ><svg
@@ -515,10 +515,10 @@
                     ></path></svg></span>
               </button>
               <div class="dropdown-menu" aria-labelledby="sortDropdown">
-                <a class="dropdown-item"  data-value="title-ascending"
+                <!-- <a class="dropdown-item"  data-value="title-ascending"
                   >Alphabetically, A-Z</a>
                 <a class="dropdown-item" data-value="title-descending"
-                  >Alphabetically, Z-A</a>
+                  >Alphabetically, Z-A</a> -->
                 <a class="dropdown-item" data-value="price-ascending"
                   >Price, low to high</a>
                 <a class="dropdown-item" data-value="price-descending"
