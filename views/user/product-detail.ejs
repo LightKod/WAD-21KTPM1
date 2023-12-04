@@ -6,16 +6,16 @@
           <div class="col-lg-4">
             <div class="image-holder">
               <img
-                src="https://images.pokemontcg.io/xy1/1_hires.png"
+                src="<%= product.image %>"
                 alt="Image"
               />
             </div>
           </div>
           <div class="col-lg-8">
             <div class="sticky-lg-top product-detail">
-              <a href="#" class="product-category mb-4">Pokémon</a>
+              <a href="#" class="product-category mb-4"><%= product.supertype %></a>
               <div class="product-name mb-4">
-                Pokémon Card Game Bulbasaur - Vending series
+                Pokémon Card Game <%= product.name %>
               </div>
               <div class="product-price mb-4">211.990₫</div>
               <div class="hstack gap-3 stock-warning mb-4">
@@ -42,7 +42,7 @@
               <hr class="mb-4" />
               <div id="productDetailText">
                 <div class="mb-4">
-                  Pokémon Card Game Bulbasaur - Vending serie
+                  Pokémon Card Game <%= product.name %>
                 </div>
                 <div class="mb-4">
                   <i>Please look at the photos carefully.</i>
@@ -317,136 +317,35 @@
             </div>
           </div>
         </div>
-
-        <div class="col-5 col-lg-3">
-          <div class="d-flex flex-column sequenced-float-in">
-            <div class="card-image">
-              <img
-                src="https://images.pokemontcg.io/xy1/1_hires.png"
-                alt="Image"
-              />
-              <a href="/products/detail" class="overlay"></a>
-              <a href="/cart">
-                <button type="button" class="add-btn">+ Quick add</button>
-              </a>
-            </div>
-            <div class="card-info">
-              <div class="d-flex flex-column">
-                <a href="#" class="card-category">Pokémon</a>
-                <a href="/products/detail">
-                  <div class="card-name">
-                    Pokémon Card Game Bulbasaur - Vending series
-                  </div>
+        <%relatedCards.forEach(card => { %>
+          <div class="col-5 col-lg-3">
+            <div class="d-flex flex-column sequenced-float-in">
+              <div class="card-image">
+                <img
+                  src="<%= card.image %>"
+                  alt="Image"
+                />
+                <a href="/products/detail/<%= card.id %>"  class="overlay"></a>
+                <a href="/cart">
+                  <button type="button" class="add-btn">+ Quick add</button>
                 </a>
-                <div class="card-price">211.990₫</div>
+              </div>
+              <div class="card-info">
+                <div class="d-flex flex-column">
+                  <a href="#" class="card-category"><%= card.supertype %></a>
+                  <a href="/products/detail">
+                    <div class="card-name">
+                      Pokémon Card Game <%= card.name %>
+                    </div>
+                  </a>
+                  <div class="card-price"><%= card.marketPrices %></div>
+                </div>
               </div>
             </div>
           </div>
-        </div>
+        <% }) %>
+     
 
-        <div class="col-5 col-lg-3">
-          <div class="d-flex flex-column sequenced-float-in">
-            <div class="card-image">
-              <img
-                src="https://images.pokemontcg.io/xy1/1_hires.png"
-                alt="Image"
-              />
-              <a href="/products/detail" class="overlay"></a>
-              <a href="/cart">
-                <button type="button" class="add-btn">+ Quick add</button>
-              </a>
-            </div>
-            <div class="card-info">
-              <div class="d-flex flex-column">
-                <a href="#" class="card-category">Pokémon</a>
-                <a href="/products/detail">
-                  <div class="card-name">
-                    Pokémon Card Game Bulbasaur - Vending series
-                  </div>
-                </a>
-                <div class="card-price">211.990₫</div>
-              </div>
-            </div>
-          </div>
-        </div>
-
-        <div class="col-5 col-lg-3">
-          <div class="d-flex flex-column sequenced-float-in">
-            <div class="card-image">
-              <img
-                src="https://images.pokemontcg.io/xy1/1_hires.png"
-                alt="Image"
-              />
-              <a href="/products/detail" class="overlay"></a>
-              <a href="/cart">
-                <button type="button" class="add-btn">+ Quick add</button>
-              </a>
-            </div>
-            <div class="card-info">
-              <div class="d-flex flex-column">
-                <a href="#" class="card-category">Pokémon</a>
-                <a href="/products/detail">
-                  <div class="card-name">
-                    Pokémon Card Game Bulbasaur - Vending series
-                  </div>
-                </a>
-                <div class="card-price">211.990₫</div>
-              </div>
-            </div>
-          </div>
-        </div>
-
-        <div class="col-5 col-lg-3">
-          <div class="d-flex flex-column sequenced-float-in">
-            <div class="card-image">
-              <img
-                src="https://images.pokemontcg.io/xy1/1_hires.png"
-                alt="Image"
-              />
-              <a href="/products/detail" class="overlay"></a>
-              <a href="/cart">
-                <button type="button" class="add-btn">+ Quick add</button>
-              </a>
-            </div>
-            <div class="card-info">
-              <div class="d-flex flex-column">
-                <a href="#" class="card-category">Pokémon</a>
-                <a href="/products/detail">
-                  <div class="card-name">
-                    Pokémon Card Game Bulbasaur - Vending series
-                  </div>
-                </a>
-                <div class="card-price">211.990₫</div>
-              </div>
-            </div>
-          </div>
-        </div>
-
-        <div class="col-5 col-lg-3">
-          <div class="d-flex flex-column sequenced-float-in">
-            <div class="card-image">
-              <img
-                src="https://images.pokemontcg.io/xy1/1_hires.png"
-                alt="Image"
-              />
-              <a href="/products/detail" class="overlay"></a>
-              <a href="/cart">
-                <button type="button" class="add-btn">+ Quick add</button>
-              </a>
-            </div>
-            <div class="card-info">
-              <div class="d-flex flex-column">
-                <a href="#" class="card-category">Pokémon</a>
-                <a href="/products/detail">
-                  <div class="card-name">
-                    Pokémon Card Game Bulbasaur - Vending series
-                  </div>
-                </a>
-                <div class="card-price">211.990₫</div>
-              </div>
-            </div>
-          </div>
-        </div>
       </div>
     </div>
   </section>
@@ -463,7 +362,7 @@
         </summary>
     </details>
     <div class="details-content mt-5">
-        <form id="reviewForm" class="vstack gap-4 align-items-center" action="" method="post">
+        <form id="reviewForm" class="vstack gap-4 align-items-center" action="/products/detail/<%= product.id %>" method="post">
             <h1>Write a review</h1>
             <input type="hidden" id="userID" name="userID" value="">
             <div class="form-floating">
@@ -478,14 +377,17 @@
         </form>
     </div>
     <div class="user-review-wrapper">
+        
         <div class="review-content vstack gap-3">
             <span class="review-content-name">Name</span>
             <p>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Necessitatibus ipsam culpa illo molestias vel soluta. Exercitationem, molestiae itaque! Recusandae repellendus impedit tempora eaque vitae sed sit suscipit dolorem nihil quasi!</p>
         </div>
+        <%product.reviews.forEach(review => { %>
         <div class="review-content vstack gap-3">
-            <span class="review-content-name">Name</span>
-            <p>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Necessitatibus ipsam culpa illo molestias vel soluta. Exercitationem, molestiae itaque! Recusandae repellendus impedit tempora eaque vitae sed sit suscipit dolorem nihil quasi!</p>
+            <span class="review-content-name"><%= review.name %></span>
+            <p><%= review.content %></p>
         </div>
+        <% }) %>
     </div>
   </section>
 </main>

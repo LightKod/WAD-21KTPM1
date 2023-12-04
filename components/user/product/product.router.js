@@ -4,21 +4,6 @@ const ProductController = require('./product.controler');
 /* GET home page. */
 router.get('/', ProductController.getProducts);
 router.get('/search', ProductController.getProductsBySearch);
-router.get('/detail', function(req, res, next) {
-  const scripts = [
-    '/scripts/product-detail.js',
-  ];
-  const styles = [
-    "/styles/product-detail.css"
-  ];
-
-  res.render('user/product-detail', 
-  {
-    layout: 'user/layouts/layout', 
-    title: "Your Shopping Cart",
-    scripts: scripts,
-    styles: styles,
-  });
-});
-
+router.get('/detail/:id', ProductController.getProductDetail);
+router.post('/detail/:id', ProductController.postReview);
 module.exports = router;

@@ -33,3 +33,33 @@ exports.getProductsBySearch = async (req, res,next) => {
     res.status(500).json({ message: error.message });
   }
 }
+exports.getProductDetail = async (req, res,next) => {
+    const id = req.params.id;
+    const card = await ProductService.getProductsDetail(id);
+    const scripts = [
+      '/scripts/product-detail.js',
+    ];
+    const styles = [
+      "/styles/product-detail.css"
+    ];
+  
+    res.render('user/product-detail', 
+    {
+      layout: 'user/layouts/layout', 
+      title: "Your Shopping Cart",
+      scripts: scripts,
+      styles: styles,
+      product: card.cardInfo,
+      relatedCards: card.relatedCard
+    });
+  }
+exports.postReview = async (req, res,next) => {
+  const cardId = req.params.id;
+  console.log(req.body.review)
+  const review = {
+    name: req.body.name,
+    content: req.body.review
+  };
+  const result = await ProductService.postReview(cardId, review);
+  res.status(200).redirect('/products/detail/'+cardId);
+}
