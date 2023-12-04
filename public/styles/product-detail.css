@@ -256,6 +256,26 @@ summary{
     padding: 1.25rem 1rem
 }
 
+.review-content .review-content-name{
+    font-size: 1rem;
+    color: #1A1A1A;
+}
+
+.review-content .review-content-name::before{
+    content: "✒️";
+    padding-inline-end: 0.5rem;
+}
+
+.review-content p{
+    font-size: 0.85rem;
+    color: #1A1A1A;
+    font-family: 'DINPro-Medium', sans-serif;
+    opacity: .85;
+    margin: 0;
+    text-align: justify;
+    text-justify: inter-word;
+}
+
 @media (max-width: 992px){
     .heading{
         flex-direction: column;
