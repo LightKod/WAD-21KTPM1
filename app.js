@@ -10,12 +10,15 @@ var homeRouter = require('./components/user/home/home.router');
 var productsRouter = require('./components/user/product/product.router');
 var cartRouter = require('./components/user/cart/cart.router');
 var loginRouter = require('./components/user/login/login.router');
+var logoutRouter = require('./components/user/logout/logout.router');
 var registerRouter = require('./components/user/register/register.router');
 //Admin Routers
 var adminDashboardRouter = require('./components/admin/dashboard');
 var adminAuthRoute = require('./components/admin/auth');
 var adminCardListRouter = require('./components/admin/card');
 var adminUserListRouter = require('./components/admin/userManagement');
+var accountRouter = require('./components/user/account/account.router');
+var ensureAuthenticated = require('./middleware/accountAuth');
 var app = express();
 //connect database server
 var connect =require('./config/mongodbconect')
@@ -53,9 +56,11 @@ app.use('/admin/user', adminUserListRouter);
 
 app.use('/', homeRouter);
 app.use('/products', productsRouter);
-app.use('/cart', cartRouter);
+app.use('/cart',ensureAuthenticated, cartRouter);
 app.use('/login', loginRouter);
 app.use('/register',registerRouter)
+app.use('/logout', logoutRouter);
+app.use('/account',ensureAuthenticated, accountRouter);
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
   next(createError(404));
