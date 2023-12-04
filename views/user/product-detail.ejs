@@ -450,4 +450,42 @@
       </div>
     </div>
   </section>
+
+  <!-- REVIEW -->
+  <section>
+    <div class="review-wrapper vstack align-items-center">
+        <div class="heading">
+            <span class="heading-title">Customer Reviews</span>
+        </div>
+    <details class="mt-5">
+        <summary>
+            Write a review
+        </summary>
+    </details>
+    <div class="details-content mt-5">
+        <form id="reviewForm" class="vstack gap-4 align-items-center" action="" method="post">
+            <h1>Write a review</h1>
+            <input type="hidden" id="userID" name="userID" value="">
+            <div class="form-floating">
+                <input type="text" class="form-control" id="name" name="name" placeholder="Enter your name:" required>
+                <label for="name">Enter your name:</label>
+            </div>
+            <div class="form-floating">
+                <textarea class="form-control" id="review" placeholder="Your review:" name="review" required></textarea>
+                <label for="review">Your review:</label>
+            </div>
+            <button type="submit" class="pink-btn">Submit review</button>
+        </form>
+    </div>
+    <div class="user-review-wrapper">
+        <div class="review-content vstack gap-3">
+            <span class="review-content-name">Name</span>
+            <p>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Necessitatibus ipsam culpa illo molestias vel soluta. Exercitationem, molestiae itaque! Recusandae repellendus impedit tempora eaque vitae sed sit suscipit dolorem nihil quasi!</p>
+        </div>
+        <div class="review-content vstack gap-3">
+            <span class="review-content-name">Name</span>
+            <p>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Necessitatibus ipsam culpa illo molestias vel soluta. Exercitationem, molestiae itaque! Recusandae repellendus impedit tempora eaque vitae sed sit suscipit dolorem nihil quasi!</p>
+        </div>
+    </div>
+  </section>
 </main>
