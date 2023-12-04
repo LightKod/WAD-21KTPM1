@@ -3,6 +3,7 @@ const router = express.Router();
 const ProductController = require('./product.controler');
 /* GET home page. */
 router.get('/', ProductController.getProducts);
+router.get('/search', ProductController.getProductsBySearch);
 router.get('/detail', function(req, res, next) {
   const scripts = [
     '/scripts/product-detail.js',

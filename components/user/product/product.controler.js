@@ -1,6 +1,6 @@
 const ProductService = require('./product.service')
 
-exports.getProducts = async (req, res) => {
+exports.getProducts = async (req, res,next) => {
   try {
     const filters = req.query.filters;
     const page = req.query.page || 1; // Lấy trang từ query string hoặc mặc định là 1
@@ -22,3 +22,14 @@ exports.getProducts = async (req, res) => {
     res.status(500).json({ message: error.message });
   }
 };
+
+exports.getProductsBySearch = async (req, res,next) => {
+  try{
+  const keyword = req.query.keyWord;
+  const foundProducts = await ProductService.getProductsByName(keyword);
+  res.json(foundProducts);
+  }
+  catch(error){
+    res.status(500).json({ message: error.message });
+  }
+}

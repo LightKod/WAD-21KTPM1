@@ -100,42 +100,24 @@ offcanvasSearchInput.addEventListener("input", (e) => {
             `
 
             // FETCHING
-            fetch(`/search?query=${queryString}`)
+            fetch(`/products/search?keyWord=${queryString}`)
             .then(response => {
-                // return response.json();
-                return [
-                    {
-                        "id": 1,
-                        "name": "Pokémon Card Game Bulbasaur - Vending series 1",
-                        "supertype": "Pokémon",
-                        "img": "https://images.pokemontcg.io/xy1/1_hires.png",
-                        "price": "211.990"
-                    },
-                    {
-                        "id": 2,
-                        "name": "Pokémon Card Game Bulbasaur - Vending series 2",
-                        "supertype": "Trainer",
-                        "img": "https://images.pokemontcg.io/g1/1_hires.png",
-                        "price": "221.990"
-                    },
-                    {
-                        "id": 3,
-                        "name": "Pokémon Card Game Bulbasaur - Vending series 3",
-                        "supertype": "Pokémon",
-                        "img": "https://images.pokemontcg.io/xy1/1_hires.png",
-                        "price": "231.990"
-                    }
-                ]
+                if (!response.ok) {
+                    throw new Error('Network response was not ok');
+                  }
+                return response.json();                
             })
+            
             .then(data => {
+                console.log(data)
                 searchResultContainer.innerHTML = data.map((item) => {
                     return `
                     <a href="/products/detail/${item.id}" class="w-100 hstack gap-4 align-items-center">
-                    <img src="${item.img}" alt="Product Image" class="search-result-img">
+                    <img src="${item.image}" alt="Product Image" class="search-result-img">
                     <div class="vstack gap-2 justify-content-center">
                         <span class="search-result-supertype">${item.supertype}</span>
                         <span class="search-result-name">${item.name}</span>
-                        <span class="search-result-price">${item.price}₫</span>
+                        <span class="search-result-price">${item.marketPrices}₫</span>
                     </div>
                     </a>
                     `

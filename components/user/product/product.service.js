@@ -47,3 +47,8 @@ exports.getProductsByFilter = async (filterString, page = 1, perPage = 24, sortS
     throw new Error('Error fetching filtered products from database: ' + error.message);
   }
 };
+
+exports.getProductsByName = async (keyword) => {
+  const foundProducts = await Card.find({ name: { $regex: keyword, $options: 'i' } });
+  return foundProducts;
+}
