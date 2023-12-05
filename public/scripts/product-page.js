@@ -63,14 +63,14 @@ function updateProducts() {
     {
         sort = {
             name:'Date, new to old',
-            updateAt: -1
+            updatedAt: -1
         }
     }
     else if(selectedSort =='Date, old to new')
     {
         sort = {
             name:'Date, old to new',
-            updateAt: 1
+            updatedAt: 1
         }
     }
     else if(selectedSort =='Price, low to high')
