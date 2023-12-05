@@ -65,3 +65,6 @@ exports.postReview = async (req, res,next) => {
   const result = await ProductService.postReview(cardId, review);
   res.status(200).redirect('/products/detail/'+cardId);
 }
+exports.productExample = async (req, res,next) => {
+  res.redirect('/');
+}

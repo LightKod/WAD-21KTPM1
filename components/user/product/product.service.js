@@ -57,12 +57,12 @@ exports.getProductsByFilter = async (filterString, page = 1, perPage = 24, sortS
 };
 
 exports.getProductsByName = async (keyword) => {
-  const foundProducts = await Card.find({ name: { $regex: keyword, $options: 'i' } });
+  const foundProducts = await Card.find({ name: { $regex: keyword, $options: 'i' } }).limit(5);
   return foundProducts;
 }
 exports.getProductsDetail = async (id) => {
   const card = await Card.findOne({id:id});
-  const relatedCard = await Card.find({subtypes: card.subtypes[0]});
+  const relatedCard = await Card.find({subtypes: card.subtypes[0]}).limit(8);
   return {
     cardInfo: card,
     relatedCard: relatedCard,
