@@ -5,7 +5,10 @@ const totalPage = document.querySelector('.total-pages')
 const checkboxes = document.querySelectorAll('.form-check-input');
 const selectedSortOption = document.getElementById('selectedSortOption');
 const dropdownMenu = document.querySelector('.dropdown-menu');
-
+const minInput = document.getElementById('min');
+const maxInput = document.getElementById('max');
+const minPrice = document.querySelector('.min-price');
+const maxPrice = document.querySelector('.max-price');
 
 
 
@@ -84,6 +87,10 @@ function updateProducts() {
             marketPrices: -1
         }
     }
+    const price ={
+        min: minInput.value,
+        max: maxInput.value
+    }
   // Lặp qua tất cả các checkbox
   checkboxes.forEach(checkbox => {
     if (checkbox.checked) {
@@ -99,7 +106,8 @@ function updateProducts() {
     const params = new URLSearchParams({
       filters: JSON.stringify(filters),
       page: quantityFields.value,
-      sort: JSON.stringify(sort)
+      sort: JSON.stringify(sort),
+      price: JSON.stringify(price)
     });
     if (Object.keys(filters).length == 0) {
         params.delete('filters')
@@ -152,3 +160,15 @@ checkboxes.forEach(checkbox => {
     });
   });
   
+  function updatePrices() {
+    const minVal = minInput.value;
+    const maxVal = maxInput.value;
+    
+    minPrice.textContent = minVal;
+    maxPrice.textContent = maxVal;
+    updateProducts();
+  }
+
+  // Bắt sự kiện khi input thay đổi và gọi hàm cập nhật giá trị
+  minInput.addEventListener('input', updatePrices);
+  maxInput.addEventListener('input', updatePrices);

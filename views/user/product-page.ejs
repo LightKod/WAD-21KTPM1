@@ -469,6 +469,21 @@
               </div>
             <% }) %>
           </div>
+          <div class="d-block align-items-center justify-content-between gap-3">
+            <span class=" fw-bold">Price:</span>
+            <div class="fw-bold">
+              <span class="fw-bold">Min:</span>
+              <span class="min-price d-inline-block"><%= price.min %></span>
+            </div>
+            <input type="range" min="0" max="100" step="1" id="min" value="<%= price.min %>" />
+
+            <div>
+              <span class="fw-bold">Max:</span>
+              <span class="max-price"><%= price.max %></span>
+          </div>
+          <input type="range" min="100" max="200" step="1" id="max" value="<%= price.max %>" />
+
+           </div>
           <hr class="mt-3" />
           <div class="d-flex align-items-center justify-content-between">
             <span class="fw-bold">In stock only:</span>

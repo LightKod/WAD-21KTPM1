@@ -105,3 +105,6 @@ body
 .quantity-btn-group .quantity:focus-visible{
     outline: none;
 }
+input[type="range"] {
+    width: 80%; /* Điều chỉnh chiều rộng tại đây */
+  }

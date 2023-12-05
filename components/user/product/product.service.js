@@ -1,10 +1,18 @@
 const Card = require('../../../models/Card');
-exports.getProductsByFilter = async (filterString, page = 1, perPage = 24, sortString) => {
+exports.getProductsByFilter = async (filterString, page = 1, perPage = 24, sortString, priceString) => {
   try {
     const filters = JSON.parse(filterString||'{}');
     console.log(filters)
     const sortSelect = JSON.parse(sortString||'{"name":"Date, new to old","updateAt":-1}');
+    const price = JSON.parse(priceString||'{"min":0,"max":100}');
+    console.log(price)
+
+    filters['marketPrices'] = {
+      $gte: price.min,
+      $lte: price.max
+    }
     const {name:sortName,...sortMethod}=sortSelect
+    const {min,max}=price
     console.log(sortSelect)
     const allFilteredProducts = await Card.find(filters).sort(sortMethod);
     const allCard = await Card.find();
@@ -36,12 +44,12 @@ exports.getProductsByFilter = async (filterString, page = 1, perPage = 24, sortS
     // console.log(filteredProducts);
     // console.log(rarityCounts);
     // console.log(totalPages);
-    
     return {
       products: filteredProducts,
       rarityCounts: rarityCounts,
       totalPages: totalPages,
-      sortName: sortName
+      sortName: sortName,
+      price:price
     };
   } catch (error) {
     throw new Error('Error fetching filtered products from database: ' + error.message);

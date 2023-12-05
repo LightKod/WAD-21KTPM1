@@ -6,17 +6,19 @@ exports.getProducts = async (req, res,next) => {
     const page = req.query.page || 1; // Lấy trang từ query string hoặc mặc định là 1
     const perPage = 24;
     const sort =req.query.sort ;
+    const price =req.query.price ;
     console.log('filter',filters)
     console.log('page',page)
     console.log('sort',sort)
-    const filteredProductsData = await ProductService.getProductsByFilter(filters, page, perPage, sort);
+    const filteredProductsData = await ProductService.getProductsByFilter(filters, page, perPage, sort, price);
 
     res.render('user/product-page', {
       products: filteredProductsData.products,
       rarityCounts: filteredProductsData.rarityCounts,
       page : page,
       totalPages: filteredProductsData.totalPages,
-      sortName: filteredProductsData.sortName
+      sortName: filteredProductsData.sortName,
+      price: filteredProductsData.price
     });
   } catch (error) {
     res.status(500).json({ message: error.message });
