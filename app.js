@@ -19,6 +19,7 @@ var adminCardListRouter = require('./components/admin/card');
 var adminUserListRouter = require('./components/admin/userManagement');
 var accountRouter = require('./components/user/account/account.router');
 var ensureAuthenticated = require('./middleware/accountAuth');
+var checkAdminAuth = require('./middleware/adminAuth');
 var app = express();
 //connect database server
 var connect =require('./config/mongodbconect')
@@ -48,11 +49,11 @@ app.use(passport.session());
 require('./config/passportConfig')
 
 
-app.use('/admin/dashboard', adminDashboardRouter);
 app.use('/admin', adminAuthRoute);
-app.use('/admin/card', adminCardListRouter);
-app.use('/admin/card/edit', adminCardListRouter);
-app.use('/admin/user', adminUserListRouter);
+app.use('/admin/dashboard', checkAdminAuth, adminDashboardRouter);
+app.use('/admin/card',checkAdminAuth, adminCardListRouter);
+app.use('/admin/card/edit',checkAdminAuth, adminCardListRouter);
+app.use('/admin/user',checkAdminAuth, adminUserListRouter);
 
 app.use('/', homeRouter);
 app.use('/products', productsRouter);

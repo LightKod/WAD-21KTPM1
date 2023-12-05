@@ -5,7 +5,7 @@ const router = express.Router();
 router.get('/', function(req, res, next) {
   const styles = [
     "/admin/vendor/datatables/dataTables.bootstrap4.min.css",
-    "/admin/external/styles/card-list.css",
+    "/adminExtra/styles/card-list.css",
   ];
   const scripts = [
     "/admin/js/datatables/table-card.js",
@@ -19,7 +19,7 @@ router.get('/edit', function(req, res, next) {
   const styles = [
   ];
   const scripts = [
-    "/admin/external/scripts/image-drop.js",
+    "/adminExtra/scripts/image-drop.js",
   ];
   res.render('admin/card-edit', {layout: 'admin/layouts/layout', title: 'Edit', scripts: scripts, styles: styles});
 });
@@ -29,7 +29,7 @@ router.get('/add', function(req, res, next) {
 
   ];
   const scripts = [
-    "/admin/external/scripts/image-drop.js",
+    "/adminExtra/scripts/image-drop.js",
   ];
   res.render('admin/card-add', {layout: 'admin/layouts/layout', title: 'Add',scripts: scripts, styles: styles});
 });
