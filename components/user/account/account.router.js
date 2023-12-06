@@ -1,38 +1,9 @@
 const express = require('express');
 const router = express.Router();
-
+const controller = require('./account.controller')
 /* GET account (orders) page. */
-router.get('/', function(req, res, next) {
-  const scripts = [
-  ];
-  const styles = [
-    "/styles/account.css"
-  ];
-
-  res.render('user/account-page', 
-  {
-    layout: 'user/layouts/layout', 
-    title: "Account",
-    scripts: scripts,
-    styles: styles,
-  });
-});
-
+router.get('/', controller.AccountPage);
 /* GET addresses page. */
-router.get('/addresses', function(req, res, next) {
-    const scripts = [
-    ];
-    const styles = [
-      "/styles/account.css"
-    ];
-  
-    res.render('user/address-page', 
-    {
-      layout: 'user/layouts/layout', 
-      title: "Addresses",
-      scripts: scripts,
-      styles: styles,
-    });
-  });  
+router.get('/addresses', controller.AddressPage);  
 
 module.exports = router;

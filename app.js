@@ -13,10 +13,11 @@ var loginRouter = require('./components/user/login/login.router');
 var logoutRouter = require('./components/user/logout/logout.router');
 var registerRouter = require('./components/user/register/register.router');
 //Admin Routers
-var adminDashboardRouter = require('./components/admin/dashboard');
-var adminAuthRoute = require('./components/admin/auth');
-var adminCardListRouter = require('./components/admin/card');
-var adminUserListRouter = require('./components/admin/userManagement');
+var adminDashboardRouter = require('./components/admin/dashboard/dashboard.router');
+var adminAuthRoute = require("./components/admin/auth/auth.router");
+var adminCardListRouter = require("./components/admin/card/card.router");
+var adminUserListRouter = require("./components/admin/userManagement/user-management.router");
+
 var accountRouter = require('./components/user/account/account.router');
 var ensureAuthenticated = require('./middleware/accountAuth');
 var checkAdminAuth = require('./middleware/adminAuth');

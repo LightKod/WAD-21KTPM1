@@ -1,18 +1,14 @@
 const express = require('express');
 const router = express.Router();
 const passport = require('passport');
+const controller = require('./auth.controller')
 
 /* GET home page. */
-router.get('/', function(req, res, next) {
-  res.render('admin/login', { layout: 'admin/layouts/simple-layout', title: 'Login'});
-});
-router.get('/login', function(req, res, next) {
-  res.render('admin/login', { layout: 'admin/layouts/simple-layout', title: 'Login'});
-});
+router.get('/', controller.LoginPage);
+router.get("/login", controller.LoginPage);
+router.get('/register',controller.RegisterPage);
+router.get("/logout", controller.Logout);
 
-router.get('/register', function(req, res, next) {
-  res.render('admin/register', { layout: 'admin/layouts/simple-layout', title: 'Register'});
-});
 
 router.post('/', function (req, res, next) {
   passport.authenticate('local-login', function (err, user, info) {
@@ -32,13 +28,6 @@ router.post('/', function (req, res, next) {
   })(req, res, next);
 }
 );
-
-router.get('/logout', function (req, res, next) {
- req.logOut(function(err){
-   if (err) { return next(err); }
-   return res.redirect('/admin');
- })
-  })
 
 
 module.exports = router;
