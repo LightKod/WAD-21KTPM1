@@ -118,13 +118,27 @@ exports.getProductsDetail = async (id) => {
 exports.postReview = async (id, review) => {
   try {
     const card = await Card.findOne({ id: id });
-
+    console.log(card)
     if (!card) {
       return res.status(404).json({ message: 'Card not found' });
     }
+    console.log(review)
     card.reviews.push(review);
     const updatedCard = await card.save();
+    console.log('Updated card thanh cong');
     return updatedCard;
+  }
+  catch (error) {
+    throw new Error('Error fetching filtered products from database: ' + error.message);
+  }
+}
+exports.getReviews = async (id) => {
+  try {
+    const card = await Card.findOne({ id: id });
+    if (!card) {
+      return res.status(404).json({ message: 'Card not found' });
+    }
+    return card.reviews;
   }
   catch (error) {
     throw new Error('Error fetching filtered products from database: ' + error.message);
@@ -181,3 +195,4 @@ exports.getFilterBar = async (filterString, priceString, category) => {
 
   return rarityCounts;
 };
+

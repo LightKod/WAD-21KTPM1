@@ -352,18 +352,8 @@
             <button type="submit" class="pink-btn">Submit review</button>
         </form>
     </div>
-    <div class="user-review-wrapper">
+    <div class="user-review-wrapper" id="userReviews">
         
-        <div class="review-content vstack gap-3">
-            <span class="review-content-name">Name</span>
-            <p>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Necessitatibus ipsam culpa illo molestias vel soluta. Exercitationem, molestiae itaque! Recusandae repellendus impedit tempora eaque vitae sed sit suscipit dolorem nihil quasi!</p>
-        </div>
-        <%product.reviews.forEach(review => { %>
-        <div class="review-content vstack gap-3">
-            <span class="review-content-name"><%= review.name %></span>
-            <p><%= review.content %></p>
-        </div>
-        <% }) %>
     </div>
   </section>
 </main>

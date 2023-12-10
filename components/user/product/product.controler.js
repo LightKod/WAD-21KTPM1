@@ -57,13 +57,15 @@ exports.getProductDetail = async (req, res,next) => {
   }
 exports.postReview = async (req, res,next) => {
   const cardId = req.params.id;
+  console.log(cardId)
+  console.log(req.body.name)
   console.log(req.body.review)
   const review = {
     name: req.body.name,
     content: req.body.review
   };
   const result = await ProductService.postReview(cardId, review);
-  res.status(200).redirect('/products/detail/'+cardId);
+  res.status(200).send(result);
 }
 exports.productExample = async (req, res,next) => {
   res.redirect('/');
@@ -104,4 +106,9 @@ exports.filtersBar = async (req, res,next) => {
   console.log('aaaaaaaaa',result)
 
   res.status(200).send(result);
+}
+exports.ListReviews = async (req, res,next) => {
+  const id = req.params.id;
+  const reviews = await ProductService.getReviews(id);
+  res.status(200).send(reviews);
 }

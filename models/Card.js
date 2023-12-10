@@ -6,7 +6,7 @@ const cardSchema = new mongoose.Schema({
     subtypes: { type: Array, required: true },
     types: { type: Array, required: true },
     updatedAt: { type: Date, default: Date.now },
-    rarity: { type: String, required: true },
+    rarity: { type: String },
     setId: { type: String, ref: 'Set' },
     image: { type: String, required: true },
     marketPrices: { type: Number, required: true },
