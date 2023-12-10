@@ -35,18 +35,6 @@
                     </button>
                     <div class="sort-dropdown" id="sortDropdown" aria-describedby="#sortBtn">
                         <div role="listbox" class="sort-dropdown-options">
-                            <button type="button" tabindex="-1" class="dropdown-option" role="option" value="featured" onclick="handleOptionClick(this, true)">
-                                <span>Featured</span>
-                            </button>
-                            <button type="button" tabindex="-1" class="dropdown-option" role="option" value="best-selling" onclick="handleOptionClick(this, true)">
-                                <span>Best selling</span>
-                            </button>
-                            <button type="button" tabindex="-1" class="dropdown-option" role="option" value="title-ascending" onclick="handleOptionClick(this, true)">
-                                <span>Alphabetically, A-Z</span>
-                            </button>
-                            <button type="button" tabindex="-1" class="dropdown-option" role="option" value="title-descending" onclick="handleOptionClick(this, true)">
-                                <span>Alphabetically, Z-A</span>
-                            </button>
                             <button type="button" tabindex="-1" class="dropdown-option" role="option" value="price-ascending" onclick="handleOptionClick(this, true)">
                                 <span>Price, low to high</span>
                             </button>
@@ -64,7 +52,7 @@
                 </div>
                 <div class="filter-menus">
                     <div class="sticky-top" style="top: 20px;">
-                        <form id="filterForm" action="/products">
+                        <form id="filterForm" action="/products/filter">
                             <!-- RARITY FILTER -->
                             <div class="filter-tab">
                                 <details aria-expanded="false">
@@ -80,7 +68,7 @@
                                     </summary>
                                 </details>
                                 <div class="filter-content">
-                                    <div class="checkbox-list">
+                                    <div class="checkbox-list" id="rarity-filter">
                                         <div class="d-flex align-items-center">
                                             <input id="rarity-filter-amazing-rare" type="checkbox" class="checkbox" name="rarity" value="Amazing Rare">
                                             <label for="rarity-filter-amazing-rare">Amazing Rare</label>
@@ -191,7 +179,7 @@
                                     </summary>
                                 </details>
                                 <div class="filter-content">
-                                    <div class="checkbox-list">
+                                    <div class="checkbox-list" id="supertype-filter">
                                         <div class="d-flex align-items-center">
                                             <input id="supertype-filter-energy" type="checkbox" class="checkbox" name="supertype" value="Energy">
                                             <label for="supertype-filter-energy">Energy</label>
@@ -222,7 +210,7 @@
                                     </summary>
                                 </details>
                                 <div class="filter-content">
-                                    <div class="checkbox-list">
+                                    <div class="checkbox-list" id="subtype-filter">
                                         <div class="d-flex align-items-center">
                                             <input id="subtype-filter-break" type="checkbox" class="checkbox" name="subtype" value="BREAK">
                                             <label for="subtype-filter-break">BREAK</label>
@@ -341,7 +329,7 @@
                                     </summary>
                                 </details>
                                 <div class="filter-content">
-                                    <div class="checkbox-list">
+                                    <div class="checkbox-list" id="type-filter">
                                         <div class="d-flex align-items-center">
                                             <input id="type-filter-colorless" type="checkbox" class="checkbox" name="type" value="Colorless">
                                             <label for="type-filter-colorless">Colorless</label>
@@ -430,7 +418,7 @@
         <!-- FILTER AND SORT OFFCANVAS -->
         <div class="offcanvas offcanvas-bottom filter-offcanvas" tabindex="-1" id="filterAndSortOffcanvas">
             <div class="offcanvas-body">
-                <form id="filterFormSmall" action="/products">
+                <form id="filterFormSmall" action="/products/filter">
                     <!-- SORT -->
                     <div class="filter-tab">
                         <details aria-expanded="false">
@@ -497,7 +485,7 @@
                             </summary>
                         </details>
                         <div class="filter-content">
-                            <div class="checkbox-list">
+                            <div class="checkbox-list" id="rarity-small-filter">
                                 <div class="d-flex align-items-center">
                                     <input id="rarity-filter-small-amazing-rare" type="checkbox" class="checkbox" name="rarity" value="Amazing Rare">
                                     <label for="rarity-filter-small-amazing-rare">Amazing Rare</label>
@@ -608,7 +596,7 @@
                             </summary>
                         </details>
                         <div class="filter-content">
-                            <div class="checkbox-list">
+                            <div class="checkbox-list" id="supertype-small-filter">
                                 <div class="d-flex align-items-center">
                                     <input id="supertype-filter-small-energy" type="checkbox" class="checkbox" name="supertype" value="Energy">
                                     <label for="supertype-filter-small-energy">Energy</label>
@@ -639,7 +627,7 @@
                             </summary>
                         </details>
                         <div class="filter-content">
-                            <div class="checkbox-list">
+                            <div class="checkbox-list" id="subtype-small-filter">
                                 <div class="d-flex align-items-center">
                                     <input id="subtype-filter-small-break" type="checkbox" class="checkbox" name="subtype" value="BREAK">
                                     <label for="subtype-filter-small-break">BREAK</label>
@@ -758,7 +746,7 @@
                             </summary>
                         </details>
                         <div class="filter-content">
-                            <div class="checkbox-list">
+                            <div class="checkbox-list" id="type-small-filter">
                                 <div class="d-flex align-items-center">
                                     <input id="type-filter-small-colorless" type="checkbox" class="checkbox" name="type" value="Colorless">
                                     <label for="type-filter-small-colorless">Colorless</label>

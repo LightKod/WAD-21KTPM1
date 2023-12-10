@@ -68,3 +68,40 @@ exports.postReview = async (req, res,next) => {
 exports.productExample = async (req, res,next) => {
   res.redirect('/');
 }
+exports.productsPage = async (req, res,next) => {
+  res.render('user/product-page-new', {
+    title: "product page new",
+    layout: 'user/layouts/layout',
+    scripts:['/scripts/product.js'],
+    styles:['/styles/product-new.css']
+  })
+}
+
+exports.getProductsByFilter = async (req, res,next) => {
+  const filters = req.query.filters;
+  const page = req.query.page || 1; // Lành trang từ query string hoặc mặc định là 1
+  const perPage = 24;
+  const sort =req.query.sort ;
+  const price =req.query.price;
+  const filteredProductsData = await ProductService.getProducts(filters, page, perPage, sort, price);
+  res.status(200).send(filteredProductsData);
+}
+exports.filtersBar = async (req, res,next) => {
+  var filterBar=['rarity','subtypes','supertype','types']
+  const except =req.params.except;
+  const filters = req.query.filters;
+  console.log('except',filters)
+  const price =req.query.price;
+  if (filterBar.includes(except) && filters!=='{}') {
+    filterBar = filterBar.filter(item => item !== except);
+  }
+  const result={}
+  const promises = filterBar.map(async (item) => {
+    result[item] = await ProductService.getFilterBar(filters, price, item);
+  });
+  await Promise.all(promises);
+  console.log('filter',filters)
+  console.log('aaaaaaaaa',result)
+
+  res.status(200).send(result);
+}
