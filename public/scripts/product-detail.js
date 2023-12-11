@@ -3,6 +3,7 @@ const plusBtns = [...document.querySelectorAll('.plus-btn')]
 const quantityFields = [...document.querySelectorAll('.quantity')]
 const reviewForm = document.getElementById('reviewForm')
 const reviewList = document.getElementById('userReviews')
+const detailsElement = document.querySelector('details');
 quantityFields.forEach((item, i) => {
     minusBtns[i].addEventListener('click', () => {
         const value = parseInt(item.value)
@@ -69,6 +70,8 @@ reviewForm.addEventListener('submit', (e) => {
     .catch(error => {
         console.error('Error:', error);
     })
+    detailsElement.removeAttribute('open');
+
 })
 window.addEventListener("load", (e) => {
     fetchReviews()
