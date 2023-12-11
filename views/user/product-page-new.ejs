@@ -384,6 +384,27 @@
                                     <input id="inStockFilter" type="checkbox" class="switch" name="in-stock" value="1">
                                 </div>
                             </div>
+                            <!-- PRICE RANGE FILTER -->
+                            <div class="filter-tab">
+                                <details aria-expanded="false">
+                                    <summary>
+                                        <div class="filter-toggle">
+                                            <span class="heavy-text">Price range</span>
+                                            <div class="circle">
+                                                <svg role="presentation" focusable="false" width="8" height="6" class="icon icon-chevron-bottom-small reverse-icon" viewBox="0 0 8 6">
+                                                    <path d="m1 1.5 3 3 3-3" fill="none" stroke="currentColor" stroke-width="1.5"></path>
+                                                </svg>
+                                            </div>
+                                        </div>
+                                    </summary>
+                                </details>
+                                <div class="filter-content">
+                                    <label id="minPriceRangeLabel" for="minPriceRange">Min: 0</label>
+                                    <input class="price-range" id="minPriceRange" type="range" min="0" max="200" step="0.1" name="min" value="0">
+                                    <label id="maxPriceRangeLabel" for="maxPriceRange">Max: 200</label>
+                                    <input class="price-range" id="maxPriceRange" type="range" min="0" max="200" step="0.1" name="max" value="200">
+                                </div>
+                            </div>
                         </form>
                     </div>
                 </div>
@@ -801,6 +822,9 @@
                             <input id="inStockFilter-small" type="checkbox" class="switch" name="in-stock" value="1">
                         </div>
                     </div>
+                    <!-- PRICE RANGE FILTER -->
+                    <input class="price-range" id="minPriceRangeSmall" type="hidden" name="min" value="0">
+                    <input class="price-range" id="maxPriceRangeSmall" type="hidden" name="max" value="200">
                     <button type="submit" class="black-btn full-width">Apply</button>
                 </form>
             </div>

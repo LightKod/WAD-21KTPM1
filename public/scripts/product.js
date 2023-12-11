@@ -15,8 +15,13 @@ const typeSmallFilter = document.getElementById("type-small-filter")
 const subtypeSmallFilter = document.getElementById("subtype-small-filter")
 const supertypeSmallFilter = document.getElementById("supertype-small-filter")
 
-const minInput = 0 // thay bằng document.getElementById("minInput")
-const maxInput = 100 // thay bằng document.getElementById("maxInput")
+// const minInput = 0 // thay bằng document.getElementById("minInput")
+// const maxInput = 100 // thay bằng document.getElementById("maxInput")
+const minPriceRangeLabel = document.getElementById("minPriceRangeLabel")
+const minPriceRange = document.getElementById("minPriceRange")
+const maxPriceRangeLabel = document.getElementById("maxPriceRangeLabel")
+const maxPriceRange = document.getElementById("maxPriceRange")
+
 var currentPage = 1
 var maxPage = null
 function sortOption(sortString)
@@ -99,7 +104,7 @@ filterForm.addEventListener("change", (e) => {
 
 filterFormSmall.addEventListener("change", (e) => {
     syncForms(e)
-    fetchProducts(filterForm)
+    // fetchProducts(filterForm) // Cái form nhỏ không có fetch mỗi lần nhấn
 })
 
 filterFormSmall.addEventListener("submit", (e) => {
@@ -135,11 +140,11 @@ const renderFilterBar = (data,element, category,isSmall=false) => {
         label.htmlFor = `${category}-filter-${data.name}`;
         if(isSmall)
         {
-            label.htmlFor = `${category}-filter-${data.name}`;
+            label.htmlFor = `${category}-small-filter-${data.name}`;
         }
         else
         {
-            label.htmlFor = `${category}-small-filter-${data.name}`;
+            label.htmlFor = `${category}-filter-${data.name}`;
         }
         label.textContent = `${data.name} (${data.count})`;
     
@@ -192,11 +197,15 @@ const fetchFilterBar = async (except,formToGet) => {
     const formData = new FormData(formToGet)
     let fillters = {}
     let price ={
-        min:minInput,
-        max:maxInput
+        // min:minInput,
+        // max:maxInput
     }
     let page=null
     for (const [key, value] of formData.entries()) {
+        if(key === "min" || key === "max"){
+            price[key] = value
+            continue
+        }
         if(fillters[key] === undefined){
             fillters[key] = []
         }
@@ -230,6 +239,9 @@ function syncForms(e){
     if(currentForm === filterFormSmall && e.target.name === "sort-by"){
         const dropdownOptionToChange = sortDropdown.firstElementChild.querySelector(`[value="${e.target.value}"]`)
         handleOptionClick(dropdownOptionToChange)
+    }
+    else if(e.target.type === "range"){
+        otherForm.querySelector(`input[name="${e.target.name}"]`).value = currentForm.querySelector(`input[name="${e.target.name}"]`).value
     }
     else{
         otherForm.querySelector(`input[name="${e.target.name}"][value="${e.target.value}"]`).checked = currentForm.querySelector(`input[name="${e.target.name}"][value="${e.target.value}"]`).checked
@@ -327,9 +339,14 @@ function fetchProducts(formToGet, fromSideBar=true, toPage=null){
     const formAction = formToGet.getAttribute("action")
     const formData = new FormData(formToGet)
     let fillters = {}
+    let price = {}
     let sort ={}
     let page=null
     for (const [key, value] of formData.entries()) {
+        if(key === "min" || key === "max"){
+            price[key] = value
+            continue
+        }
         if(fillters[key] === undefined){
             fillters[key] = []
         }
@@ -359,6 +376,7 @@ function fetchProducts(formToGet, fromSideBar=true, toPage=null){
     }
     const params = new URLSearchParams({
         filters: JSON.stringify(fillters),
+        price: JSON.stringify(price),
         page: page,
         sort: JSON.stringify(sort),
     })
@@ -479,6 +497,22 @@ prevPageBtn.addEventListener("click", (e) => {
     }
     currentPageText.innerHTML = `${currentPage}&nbsp;&nbsp;/&nbsp;&nbsp;${maxPage}`
     fetchProducts(filterForm, true, currentPage)
+})
+
+minPriceRange.addEventListener("input", (e) => {
+    minPriceRangeLabel.innerHTML = `Min: ${minPriceRange.value}`
+    if(parseFloat(minPriceRange.value) > parseFloat(maxPriceRange.value)){
+        maxPriceRange.value = minPriceRange.value
+        maxPriceRangeLabel.innerHTML = `Max: ${maxPriceRange.value}`
+    }
+})
+
+maxPriceRange.addEventListener("input", (e) => {
+    maxPriceRangeLabel.innerHTML = `Max: ${maxPriceRange.value}`
+    if(parseFloat(maxPriceRange.value) < parseFloat(minPriceRange.value)){
+        minPriceRange.value = maxPriceRange.value
+        minPriceRangeLabel.innerHTML = `Min: ${minPriceRange.value}`
+    }
 })
 
 // FETCH WHEN ENTER PAGE
