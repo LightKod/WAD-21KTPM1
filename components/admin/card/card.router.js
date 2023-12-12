@@ -4,7 +4,7 @@ const controller = require('./card.controller')
 
 /* GET home page. */
 router.get("/", controller.CardPage);
-router.get("/edit", controller.CardEditPage);
+router.get("/edit/:id", controller.CardEditPage);
 router.get("/add", controller.CardAddPage);
 
 module.exports = router;

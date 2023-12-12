@@ -12,13 +12,14 @@
           <div class="form-row">
             <!--Card Name-->
             <div class="form-group col-md-8">
-              <label for="cardName">Card Name</label>
+              <label for="cardName">Card name</label>
               <input
                 type="text"
                 class="form-control"
                 id="cardName"
                 name="cardName"
                 placeholder="Card Name"
+                value="<%= card.name %>"
               />
             </div>
             <!--Card ID-->
@@ -30,6 +31,7 @@
                 id="cardID"
                 name="cardID"
                 placeholder="Card ID"
+                value="<%= card.id %>"
               />
             </div>
           </div>
