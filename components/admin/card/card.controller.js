@@ -1,3 +1,4 @@
+const cardService=require('./card.service')
 exports.CardPage = function (req, res, next) {
   const styles = [
     "/admin/vendor/datatables/dataTables.bootstrap4.min.css",
@@ -38,4 +39,24 @@ exports.CardAddPage = function (req, res, next) {
     scripts: scripts,
     styles: styles,
   });
+};
+
+
+exports.CardUpload = async function (req, res, next) {
+  try {
+    if (!req.file) {
+      return res.status(400).send('No file uploaded.');
+    }
+    const file = req.file;
+
+    // Sử dụng await để nhận URL trả về từ hàm uploadCard
+    const imageUrl = await cardService.uploadCard(file);
+    const updateCard = await cardService.updateCard(req.body, imageUrl);
+    // Trả về URL của tệp tin đã tải lên
+    console.log(updateCard);
+    res.status(200).send(imageUrl);
+  } catch (error) {
+    console.error(error);
+    res.status(500).send('Error uploading file.');
+  }
 };
