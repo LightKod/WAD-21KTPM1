@@ -19,5 +19,6 @@ function previewImage() {
 
         // Read the file as a data URL
         reader.readAsDataURL(file);
+        
       }
     }

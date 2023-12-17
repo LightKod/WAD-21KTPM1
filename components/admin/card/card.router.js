@@ -7,7 +7,7 @@ const multerUpload = multer({ storage: multerStorage })
 
 /* GET home page. */
 router.get("/", controller.CardPage);
-router.get("/edit", controller.CardEditPage);
+router.get("/edit/:id", controller.CardEditPage);
 router.get("/add", controller.CardAddPage);
 router.post("/upload", multerUpload.single('image'), controller.CardUpload);
 module.exports = router;

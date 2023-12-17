@@ -20,12 +20,7 @@
     </div>
     <div class="card-body">
       <div class="table-responsive">
-        <table
-          class="table table-bordered"
-          id="table-card"
-          width="100%"
-          cellspacing="0"
-        >
+        <table class="table table-bordered" id="table-card" width="100%" cellspacing="0">
           <thead>
             <tr>
               <th style="width: 10%">ID</th>
@@ -49,13 +44,14 @@
             </tr>
           </tfoot> -->
           <tbody>
+            <% products.forEach((card) => { %>
             <tr>
-              <td>xy1-1</td>
-              <td>xy1</td>
-              <td>Venusaur-EX</td>
-              <td>Rare Holo EX</td>
-              <td>$3.32</td>
-              <td>10</td>
+              <td><%= card.id %></td>
+              <td><%= card.setId %></td>
+              <td><%= card.name %></td>
+              <td><%= card.rarity %></td>
+              <td><%= card.marketPrices %></td>
+              <td><%= card.amount %></td>
               <td>
                 <div class="badge badge-success border custom-card-badge">
                   Active
@@ -64,21 +60,11 @@
               <td>
                 <div class="d-flex justify-content-center align-items-center">
                   <div class="dropdown">
-                    <button
-                      class="btn btn-secondary dropdown-toggle"
-                      type="button"
-                      id="dropdownMenuButton"
-                      data-toggle="dropdown"
-                      aria-haspopup="true"
-                      aria-expanded="false"
-                    >
+                    <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                       Action
                     </button>
-                    <div
-                      class="dropdown-menu"
-                      aria-labelledby="dropdownMenuButton"
-                    >
-                      <a class="dropdown-item" href="#">View</a>
+                    <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                      <a class="dropdown-item" href="/admin/card/edit/<%= card.id %>">View</a>
                       <a class="dropdown-item" href="#">Edit</a>
                       <a class="dropdown-item" href="#">Export</a>
                       <a class="dropdown-item" href="#">Lock</a>
@@ -88,45 +74,7 @@
                 </div>
               </td>
             </tr>
-            <tr>
-              <td>xy1-29</td>
-              <td>xy1</td>
-              <td>Blastoise-EX</td>
-              <td>Rare Holo EX</td>
-              <td>$4.0</td>
-              <td>10</td>
-              <td>
-                <div class="badge badge-danger border custom-card-badge">
-                  Disable
-                </div>
-              </td>
-              <td>
-                <div class="d-flex justify-content-center align-items-center">
-                  <div class="dropdown">
-                    <button
-                      class="btn btn-secondary dropdown-toggle"
-                      type="button"
-                      id="dropdownMenuButton"
-                      data-toggle="dropdown"
-                      aria-haspopup="true"
-                      aria-expanded="false"
-                    >
-                      Action
-                    </button>
-                    <div
-                      class="dropdown-menu"
-                      aria-labelledby="dropdownMenuButton"
-                    >
-                      <a class="dropdown-item" href="#">View</a>
-                      <a class="dropdown-item" href="#">Edit</a>
-                      <a class="dropdown-item" href="#">Export</a>
-                      <a class="dropdown-item" href="#">Lock</a>
-                      <a class="dropdown-item" href="#">Delete</a>
-                    </div>
-                  </div>
-                </div>
-              </td>
-            </tr>
+            <% }); %>
           </tbody>
         </table>
       </div>

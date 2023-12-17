@@ -60,7 +60,7 @@ exports.uploadCard = (file) => {
           updatedAt: new Date(),
           types: cardInfo.types,
           marketPrices: cardInfo.price,
-          timestamp: new Date().toTimeString(),
+          timestamp: new Date().timestamp,
           amount: cardInfo.amount
          } }, // Dữ liệu cần cập nhật
         { new: true } // Trả về thẻ đã cập nhật (nếu không có sẽ trả về thẻ trước khi cập nhật)
@@ -74,3 +74,20 @@ exports.uploadCard = (file) => {
       throw new Error('Error updating card.');
     }
   };
+
+exports.GetAllCards = async () => {
+  try {
+    const card = await Card.find();
+    return card;
+  } catch (error) {
+    throw new Error(
+      "Error fetching filtered products from database: " + error.message
+    );
+  }
+};
+
+
+exports.GetCard = async (id) => {
+  const card = await Card.findOne({ id: id });
+  return card;
+}

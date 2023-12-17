@@ -52,7 +52,7 @@ require('./config/passportConfig')
 
 app.use('/admin', adminAuthRoute);
 app.use('/admin/dashboard', checkAdminAuth, adminDashboardRouter);
-app.use('/admin/card',checkAdminAuth, adminCardListRouter);
+app.use('/admin/card', adminCardListRouter);
 app.use('/admin/card/edit',checkAdminAuth, adminCardListRouter);
 app.use('/admin/user',checkAdminAuth, adminUserListRouter);
 
