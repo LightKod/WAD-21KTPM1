@@ -5,6 +5,8 @@ var cookieParser = require('cookie-parser');
 var logger = require('morgan');
 var expressLayouts = require('express-ejs-layouts')
 const passport = require('passport');
+require('dotenv').config();
+
 
 var homeRouter = require('./components/user/home/home.router');
 var productsRouter = require('./components/user/product/product.router');

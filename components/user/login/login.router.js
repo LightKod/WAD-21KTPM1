@@ -27,5 +27,9 @@ router.post('/', function (req, res, next) {
   })(req, res, next);
 }
 );
-
+router.get('/federated/google', passport.authenticate('google'));
+router.get('/oauth2/redirect/google', passport.authenticate('google', {
+  successRedirect: '/account',
+  failureRedirect: '/login'
+}));
 module.exports = router;
