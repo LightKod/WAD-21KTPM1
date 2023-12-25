@@ -12,7 +12,7 @@ exports.AccountPage = function (req, res, next) {
 
 
 exports.AddressPage = function (req, res, next) {
-  const scripts = [];
+  const scripts = ["/scripts/addresses.js"];
   const styles = ["/styles/account.css"];
 
   res.render("user/address-page", {

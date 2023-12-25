@@ -3,8 +3,55 @@
         <div class="account-nav-wrapper">
             <div class="hstack gap-4 justify-content-center align-items-center account-nav">
                 <span class="account-nav-item"><a href="/account">Orders</a></span>
-                <span class="account-nav-item chosen"><a href="/account/addresses">Addresses</a></span>
+                <span class="account-nav-item chosen"><a href="/account/addresses">Profile</a></span>
                 <span class="account-nav-logout"><a href="/logout">Logout</a></span>
+            </div>
+        </div>
+    </section>
+
+    <!-- USER'S PROFILE -->
+    <section>
+        <div class="section-wrapper">
+            <div class="vstack gap-4 align-items-center justify-content-center">
+                <span class="title">Profile</span>
+                <div class="user-avatar">
+                    <!-- Thay cái url bằng url avatar của user -->
+                    <div class="user-img" style="--_img_url: url('/images/user.jpg')"></div>
+                </div>
+                <div class="user-profile-wrapper">
+                    <div class="user-profile-tab">
+                        <div class="d-flex justify-content-between">
+                            <span class="bold-text">User ID:</span>
+                            <span class="light-text">123456</span>
+                        </div>
+                        <div class="d-flex justify-content-between">
+                            <span class="bold-text">Email:</span>
+                            <span class="light-text">email@email.com</span>
+                        </div>
+                        <div class="d-flex justify-content-between">
+                            <span class="bold-text">Name:</span>
+                            <span class="light-text">Meo Meo Meo</span>
+                        </div>
+                    </div>
+                    <div class="user-profile-tab">
+                        <div class="d-flex justify-content-between">
+                            <span class="bold-text">Gender:</span>
+                            <span class="light-text">Unknown</span>
+                        </div>
+                        <div class="d-flex justify-content-between">
+                            <span class="bold-text">Date of birth:</span>
+                            <span class="light-text">DD/MM/YYYY</span>
+                        </div>
+                        <div class="d-flex justify-content-between">
+                            <span class="bold-text">Phone number:</span>
+                            <span class="light-text">0123456789</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="hstack gap-4 justify-content-center">
+                    <button type="button" class="black-btn" data-bs-toggle="offcanvas" data-bs-target="#editProfileOffcanvas" aria-controls="editProfileOffcanvas">Edit profile</button>
+                    <button type="button" class="black-btn" data-bs-toggle="offcanvas" data-bs-target="#changePasswordOffcanvas" aria-controls="changePasswordOffcanvas">Change password</button>
+                </div>
             </div>
         </div>
     </section>
@@ -86,7 +133,7 @@
         <div class="offcanvas-body">
             <div class="vstack gap-4">
                 <p>Please fill in the information below:</p>
-                <form class="row g-3" action="/account/address/add">
+                <form class="row g-3" action="/account/address/add" method="post">
                     <div class="col-6">
                         <div class="form-floating">
                             <input type="text" class="form-control" id="firstName" name="firstName" placeholder="First name">
@@ -107,8 +154,8 @@
                     </div>
                     <div class="col-12">
                         <div class="form-floating">
-                            <input type="text" class="form-control" id="phone" name="phone" placeholder="Phone">
-                            <label for="phone">Phone</label>
+                            <input type="text" class="form-control" id="addPhone" name="phone" placeholder="Phone">
+                            <label for="addPhone">Phone</label>
                         </div>
                     </div>
                     <div class="col-12">
@@ -149,7 +196,7 @@
         </div>
         <div class="offcanvas-body">
             <div class="vstack gap-4">
-                <form class="row g-3" action="/account/address/update">
+                <form class="row g-3" action="/account/address/update" method="post">
                     <input type="hidden" id="addressID" name="addressID" value="">
                     <div class="col-6">
                         <div class="form-floating">
@@ -200,6 +247,103 @@
                         </div>
                     </div>
                     <button type="submit" class="black-btn">Save address</button>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <!-- Edit profile offcanvas -->
+    <div class="offcanvas offcanvas-end" tabindex="-1" id="editProfileOffcanvas" aria-labelledby="editProfileOffcanvasLabel">
+        <div class="offcanvas-header">
+            <h5 class="offcanvas-title" id="editProfileOffcanvasLabel">Edit profile</h5>
+            <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+        </div>
+        <div class="offcanvas-body">
+            <div class="vstack gap-4">
+                <form class="row g-3" action="/account/profile/update" method="post">
+                    <div class="col-12">
+                        <div class="form-floating">
+                            <input type="text" class="form-control" id="id" name="id" placeholder="User ID" value="1234546" readonly>
+                            <label for="id">User ID</label>
+                        </div>
+                    </div>
+                    <div class="col-12">
+                        <div class="form-floating">
+                            <input type="text" class="form-control" id="email" name="email" placeholder="Email" value="email@email.com" readonly>
+                            <label for="email">Email</label>
+                        </div>
+                    </div>
+                    <div class="col-12">
+                        <div class="form-floating">
+                            <input type="text" class="form-control" id="name" name="name" placeholder="Name" required>
+                            <label for="name">Name</label>
+                        </div>
+                    </div>
+                    <div class="col-6">
+                        <div class="form-floating">
+                            <select class="form-select" id="gender" name="gender">
+                                <option value="1">Male</option>
+                                <option value="2">Female</option>
+                                <option value="3">Other</option>
+                            </select>
+                            <label for="gender">Gender</label>
+                        </div>
+                    </div>
+                    <div class="col-6">
+                        <div class="form-floating">
+                            <input type="date" class="form-control" id="dob" name="dob" placeholder="Date of birth">
+                            <label for="dob">Date of birth</label>
+                        </div>
+                    </div>
+                    <div class="col-12">
+                        <div class="form-floating">
+                            <input type="text" class="form-control" id="phone" name="phone" placeholder="Phone number">
+                            <label for="phone">Phone number</label>
+                        </div>
+                    </div>
+                    <div class="col-12">
+                        <div class="form-floating">
+                            <input type="file" class="form-control" id="avatar" name="avatar" placeholder="Avatar image" accept="image/jpg, image/png, image/jpeg">
+                            <label for="phone">Avatar image</label>
+                        </div>
+                    </div>
+                    
+                    <button type="submit" class="black-btn">Save profile</button>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <!-- Change Password Offcanvas -->
+    <div class="offcanvas offcanvas-bottom" tabindex="-1" id="changePasswordOffcanvas" aria-labelledby="changePasswordOffcanvasLabel">
+        <div class="offcanvas-header">
+            <h5 class="offcanvas-title" id="editProfileOffcanvasLabel">Change password</h5>
+            <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+        </div>
+        <div class="offcanvas-body">
+            <div class="vstack gap-4">
+                <form id="changePasswordForm" class="row g-3">
+                    <div id="changePasswordWarning" class="col-12">
+                    </div>
+                    <div class="col-12">
+                        <div class="form-floating">
+                            <input type="password" class="form-control" id="oldPassword" name="old_password" placeholder="Old password" required>
+                            <label for="oldPassword">Old password</label>
+                        </div>
+                    </div>
+                    <div class="col-12">
+                        <div class="form-floating">
+                            <input type="password" class="form-control" id="newPassword" name="new_password" placeholder="New password" required>
+                            <label for="newPassword">New password</label>
+                        </div>
+                    </div>
+                    <div class="col-12">
+                        <div class="form-floating">
+                            <input type="password" class="form-control" id="confirmPassword" name="confirm_password" placeholder="New password" required>
+                            <label for="confirmPassword">Confirm new password</label>
+                        </div>
+                    </div>
+                    <button type="submit" class="black-btn">Change password</button>
                 </form>
             </div>
         </div>

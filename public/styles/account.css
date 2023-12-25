@@ -63,7 +63,7 @@ p{
 }
 
 .empty-state-wrapper{
-    margin: 128px 48px;
+    padding: 128px 48px;
 }
 
 .empty-state-wrapper .icon-wrapper{
@@ -111,7 +111,7 @@ p{
 }
 
 .section-wrapper{
-    margin: 64px 48px 96px
+    padding: 64px 48px 96px
 }
 
 .title{
@@ -248,10 +248,80 @@ p{
     font-family: 'DINPro-Medium', sans-serif;
 }
 
+.form-floating select{
+    font-size: 0.85rem;
+    font-family: 'DINPro-Medium', sans-serif;
+}
+
 .form-floating label{
     font-size: 0.85rem;
     font-family: 'DINPro-Medium', sans-serif;
     opacity: .85;
+}
+
+
+
+.user-profile-wrapper{
+    width: 100%;
+    display: grid;
+    grid-template-columns: 1fr 2fr 2fr 1fr;
+}
+
+.user-profile-tab{
+    padding: 0 22px;
+    border: 0 solid rgba(26, 26, 26, .3);
+    border-right-width: 0.05rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    gap: 11px;
+}
+
+.user-profile-tab:first-child{
+    grid-column-start: 2;
+}
+
+.user-profile-tab+.user-profile-tab{
+    border-right-width: 0;
+}
+
+.bold-text{
+    font-family: 'DINPro-Bold', sans-serif;
+    font-size: 0.95rem;
+}
+
+.light-text{
+    font-family: 'DINPro-Medium', sans-serif;
+    font-size: 0.95rem;
+    opacity: .85;
+}
+
+.user-avatar{
+    width: 96px;
+    height: 96px;
+}
+
+.user-img{
+    width: inherit;
+    height: inherit;
+    background-image: var(--_img_url);
+    background-size: cover;
+    background-position: 50% 50%;
+    background-color: #1A1A1A1A;
+    border-radius: 50%;
+}
+
+.offcanvas-bottom{
+    --bs-offcanvas-height: 70vh;
+}
+
+#changePasswordWarning{
+    display: none;
+    align-items: center;
+    gap: 11px;
+    color: #E74C3C;
+    font-size: 0.95rem;
+    font-family: 'DINPro-Medium', sans-serif;
 }
 
 @media (max-width: 768px){
@@ -262,6 +332,26 @@ p{
     .order-name{
         grid-column-start: 1;
         grid-column-end: 4;
+    }
+
+    
+    .user-profile-wrapper{
+        width: 80%;
+        grid-template-columns: 1fr;
+        row-gap: 11px;
+    }
+    .content-filler{
+        display: none;
+    }
+    .user-profile-tab{
+        border-right-width: 0;
+    }
+    .user-profile-tab:first-child{
+        padding-bottom: 0;
+        grid-column-start: 1;
+    }
+    .user-profile-tab:last-child{
+        padding-top: 0;
     }
 }
 
@@ -283,5 +373,9 @@ p{
     .order-status{
         grid-column-start: 1;
         grid-column-end: 3;
+    }
+
+    .user-profile-wrapper{
+        width: 100%;
     }
 }
