@@ -1,5 +1,8 @@
-const cardService=require('./card.service')
-const service = require('./card.service')
+const cardService = require("./card.service");
+const service = require("./card.service");
+const subTypeService = require("../../category/subtypes/subtypes.service");
+const typeService = require("../../category/types/types.service");
+const rarityService = require("../../category/rarities/rarities.service");
 
 exports.CardPage = async function (req, res, next) {
   const styles = [
@@ -21,11 +24,17 @@ exports.CardPage = async function (req, res, next) {
   });
 };
 
-
 exports.CardEditPage = async function (req, res, next) {
   const id = req.params.id;
-  const styles = [];
-  const scripts = ["/adminExtra/scripts/image-drop.js"];
+
+  const styles = ["/adminExtra/styles/card-edit.css"];
+  const scripts = [
+    "/adminExtra/scripts/image-drop.js",
+    "/adminExtra/scripts/addcard.js",
+  ];
+  const subtypes = await subTypeService.GetAllSubtypes();
+  const types = await typeService.GetAllTypes();
+  const rarities = await rarityService.GetAllRarities();
   const card = await service.GetCard(id);
   res.render("admin/card-edit", {
     layout: "admin/layouts/layout",
@@ -33,9 +42,11 @@ exports.CardEditPage = async function (req, res, next) {
     scripts: scripts,
     styles: styles,
     card: card,
+    subtypes: subtypes,
+    types: types,
+    rarities: rarities,
   });
 };
-
 
 exports.CardAddPage = function (req, res, next) {
   const styles = [];
@@ -48,11 +59,10 @@ exports.CardAddPage = function (req, res, next) {
   });
 };
 
-
 exports.CardUpload = async function (req, res, next) {
   try {
     if (!req.file) {
-      return res.status(400).send('No file uploaded.');
+      return res.status(400).send("No file uploaded.");
     }
     const file = req.file;
     console.log(req.body);
@@ -64,6 +74,6 @@ exports.CardUpload = async function (req, res, next) {
     res.status(200).send(imageUrl);
   } catch (error) {
     console.error(error);
-    res.status(500).send('Error uploading file.');
+    res.status(500).send("Error uploading file.");
   }
 };
