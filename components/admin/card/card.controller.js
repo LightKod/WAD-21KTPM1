@@ -30,7 +30,8 @@ exports.CardEditPage = async function (req, res, next) {
   const styles = ["/adminExtra/styles/card-edit.css"];
   const scripts = [
     "/adminExtra/scripts/image-drop.js",
-    "/adminExtra/scripts/addcard.js",
+    "/adminExtra/scripts/card-submit.js",
+    "/adminExtra/scripts/card-form.js",
   ];
   const subtypes = await subTypeService.GetAllSubtypes();
   const types = await typeService.GetAllTypes();
@@ -60,6 +61,7 @@ exports.CardAddPage = function (req, res, next) {
 };
 
 exports.CardUpload = async function (req, res, next) {
+  console.log(req.body);
   try {
     if (!req.file) {
       return res.status(400).send("No file uploaded.");
