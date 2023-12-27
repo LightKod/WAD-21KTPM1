@@ -260,7 +260,7 @@
         </div>
         <div class="offcanvas-body">
             <div class="vstack gap-4">
-                <form class="row g-3" action="/account/profile/update" method="post">
+                <form class="row g-3" action="/account/profile/update"  method="post" enctype =" multipart/form-data">
                     <div class="col-12">
                         <div class="form-floating">
                             <input type="text" class="form-control" id="id" name="id" placeholder="User ID" value="1234546" readonly>
@@ -282,9 +282,9 @@
                     <div class="col-6">
                         <div class="form-floating">
                             <select class="form-select" id="gender" name="gender">
-                                <option value="1">Male</option>
-                                <option value="2">Female</option>
-                                <option value="3">Other</option>
+                                <option value="Male">Male</option>
+                                <option value="Female">Female</option>
+                                <option value="Other">Other</option>
                             </select>
                             <label for="gender">Gender</label>
                         </div>
@@ -303,8 +303,8 @@
                     </div>
                     <div class="col-12">
                         <div class="form-floating">
-                            <input type="file" class="form-control" id="avatar" name="avatar" placeholder="Avatar image" accept="image/jpg, image/png, image/jpeg">
-                            <label for="phone">Avatar image</label>
+                            <input type="file" class="form-control" id="avatar" name="avatar" placeholder="Avatar image" >
+                            <label for="avatar">Avatar image</label>
                         </div>
                     </div>
                     

@@ -1,12 +1,7 @@
 const Card = require('../../../models/Card');
 //connect firebase
 const admin = require('firebase-admin');
-const serviceAccount = require('../../../config/fireBaseConfig.json'); // Thay đổi đường dẫn đến tệp cấu hình
 
-admin.initializeApp({
-  credential: admin.credential.cert(serviceAccount),
-  storageBucket: 'gs://wibuteam-8d09e.appspot.com' // Thay đổi URL bucket của Firebase Storage
-});
 const bucket = admin.storage().bucket();
 exports.uploadCard = (file) => {
     return new Promise((resolve, reject) => {

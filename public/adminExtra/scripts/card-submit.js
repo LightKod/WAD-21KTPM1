@@ -44,7 +44,9 @@ async function gatherAndPrintFormData(event) {
   // Add timestamp with the Unix timestamp of the current time
   formDataObject.timestamp = Date.now();
   //formDataObject.image = GetFile();
-  formDataObject.image = await GetInputImage();
+  // formDataObject.image = await GetInputImage();
+  formDataObject.image = GetFile();
+  //formDataObject.image = await GetInputImage();
   // Log the form data object to the console
   console.log(formDataObject);
   //Post it here

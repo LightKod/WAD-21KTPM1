@@ -58,8 +58,15 @@ passport.use('local-login', new LocalStrategy({
         console.log('Tài Khoảng không tồn tại.');
         return done(null, false, { message: 'Tài Khoảng không tồn tại.' });
       }
-      if (!bcrypt.compareSync(password, user.password)) {
-        return done(null, false, { message: 'Mật Khẩu không đúng.' });
+      if (user?.password)
+      {
+        if (!bcrypt.compareSync(password, user.password)) {
+          return done(null, false, { message: 'Mật Khẩu không đúng.' });
+        }
+      }
+      else
+      {
+        return done(null, false, { message: 'Hãy đăng nhập nhanh với google mật khẩu chưa được thiết lập' });
       }
       console.log(user);
       return done(null, user);
@@ -86,8 +93,8 @@ passport.use(new GoogleStrategy({
         // Tạo người dùng mới và lưu vào cơ sở dữ liệu
         const newUser = new User();
         newUser.id = id;
-        newUser.email = profile.email;
-        newUser.password = bcrypt.hashSync(profile.id, bcrypt.genSaltSync(10));
+        newUser.email = profile.emails[0].value;
+        newUser.googleId = profile.id;
         newUser.save().then(() => {
           console.log({ 'id': id, 'email': email });
         }).catch((err) => {
@@ -111,8 +118,8 @@ passport.serializeUser(function (user, cb) {
 
 passport.deserializeUser(function (user, cb) {
   process.nextTick(function () {
-    console.log('deserializeUser');
-    console.log(user);
+    // console.log('deserializeUser');
+    // console.log(user);
     return cb(null, user);
   });
 });

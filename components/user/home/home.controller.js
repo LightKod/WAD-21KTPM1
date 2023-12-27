@@ -1,6 +1,6 @@
 exports.HomePage = function (req, res, next) {
-  console.log("home");
-  console.log(req.user);
+  // console.log("home");
+  // console.log(req.user);
   const scripts = ["/scripts/landing-page.js"];
   const styles = ["/styles/landing-page.css"];
 

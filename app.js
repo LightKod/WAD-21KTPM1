@@ -7,6 +7,14 @@ var expressLayouts = require('express-ejs-layouts')
 const passport = require('passport');
 require('dotenv').config();
 
+//config firebase
+const admin = require('firebase-admin');
+const serviceAccount = require('./config/fireBaseConfig.json'); // Thay đổi đường dẫn đến tệp cấu hình
+
+admin.initializeApp({
+  credential: admin.credential.cert(serviceAccount),
+  storageBucket: 'gs://wibuteam-8d09e.appspot.com' // Thay đổi URL bucket của Firebase Storage
+});
 
 var homeRouter = require('./components/user/home/home.router');
 var productsRouter = require('./components/user/product/product.router');
@@ -64,7 +72,7 @@ app.use('/cart',ensureAuthenticated, cartRouter);
 app.use('/login', loginRouter);
 app.use('/register',registerRouter)
 app.use('/logout', logoutRouter);
-app.use('/account',ensureAuthenticated, accountRouter);
+app.use('/account', accountRouter);
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
   next(createError(404));
