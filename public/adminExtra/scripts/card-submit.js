@@ -43,11 +43,15 @@ async function gatherAndPrintFormData(event) {
 
   // Add timestamp with the Unix timestamp of the current time
   formDataObject.timestamp = Date.now();
-  formDataObject.image = GetFile();
-  //formDataObject.image = await GetInputImage();
-  // Log the form data object to the console
+  formDataObject.image = GetFile("input");
+  var images = [
+    GetFile("input"),
+    GetFile("input-1"),
+    GetFile("input-2"),
+    GetFile("input-3"),
+  ];
+  formDataObject.images = images;
   console.log(formDataObject);
-  //Post it here
   PostData(formDataObject);
 }
 
@@ -90,33 +94,8 @@ function GetCurrentDate() {
   formattedDateString = formattedDateString.replace(/\,/g, "");
   return formattedDateString;
 }
-
-async function GetInputImage() {
-  return new Promise((resolve) => {
-    var fileInput = document.getElementById("fileInput");
-
-    if (fileInput.files.length > 0) {
-      var file = fileInput.files[0];
-      var reader = new FileReader();
-
-      // Set up the FileReader to read the image
-      reader.onload = function (e) {
-        // Save the image data to an object with the name "image"
-        var imageData = e.target.result;
-        // Resolve the Promise with the image data
-        resolve(imageData);
-      };
-
-      // Wait for the image to load before returning
-      reader.readAsDataURL(file);
-    } else {
-      // If no file is selected, resolve the Promise with null
-      resolve(null);
-    }
-  });
-}
-function GetFile() {
-  var fileInput = document.getElementById("fileInput");
+function GetFile(inputId) {
+  var fileInput = document.getElementById(inputId);
 
   if (fileInput.files.length > 0) {
     var file = fileInput.files[0];
