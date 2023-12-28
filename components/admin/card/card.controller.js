@@ -3,6 +3,7 @@ const service = require("./card.service");
 const subTypeService = require("../../category/subtypes/subtypes.service");
 const typeService = require("../../category/types/types.service");
 const rarityService = require("../../category/rarities/rarities.service");
+const setService = require("../../category/sets/sets.service");
 
 exports.CardPage = async function (req, res, next) {
   const styles = [
@@ -36,6 +37,7 @@ exports.CardEditPage = async function (req, res, next) {
   const subtypes = await subTypeService.GetAllSubtypes();
   const types = await typeService.GetAllTypes();
   const rarities = await rarityService.GetAllRarities();
+  const sets = await setService.GetAllSets(id);
   const card = await service.GetCard(id);
   res.render("admin/card-edit", {
     layout: "admin/layouts/layout",
@@ -45,6 +47,7 @@ exports.CardEditPage = async function (req, res, next) {
     card: card,
     subtypes: subtypes,
     types: types,
+    sets: sets,
     rarities: rarities,
   });
 };
