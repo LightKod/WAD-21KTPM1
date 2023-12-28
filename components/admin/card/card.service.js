@@ -44,24 +44,30 @@ exports.uploadCard = (file) => {
 
   exports.updateCard = async (cardInfo, imageUrl) => {
     try {
-      // Cập nhật thông tin thẻ và hình ảnh mới
+      const updateData = {
+        name: cardInfo.name,
+        rarity: cardInfo.rarity,
+        setId: cardInfo.setId,
+        updatedAt: new Date(),
+        types: cardInfo.types,
+        marketPrices: cardInfo.price,
+        timestamp: new Date().timestamp,
+        amount: cardInfo.amount
+      };
+  
+      // Kiểm tra xem imageUrl có được cung cấp không
+      if (imageUrl) {
+        updateData.image = imageUrl; // Hoặc sử dụng 'imageUrl' thay cho 'image'
+      }
+  
+      // Tiến hành cập nhật dữ liệu thẻ
       const updatedCard = await Card.findOneAndUpdate(
         { id: cardInfo.id }, // Điều kiện tìm thẻ cần cập nhật (thay id bằng trường khóa chính của thẻ)
-        { $set: { 
-          name: cardInfo.name,
-          rarity: cardInfo.rarity,
-          image: imageUrl,
-          setId: cardInfo.setId,
-          updatedAt: new Date(),
-          types: cardInfo.types,
-          marketPrices: cardInfo.price,
-          timestamp: new Date().timestamp,
-          amount: cardInfo.amount
-         } }, // Dữ liệu cần cập nhật
+        { $set: updateData }, // Dữ liệu cần cập nhật
         { new: true } // Trả về thẻ đã cập nhật (nếu không có sẽ trả về thẻ trước khi cập nhật)
       );
   
-      // Nếu bạn muốn trả về thông tin thẻ đã cập nhật
+      // Trả về thông tin thẻ đã cập nhật
       return updatedCard;
     } catch (error) {
       // Xử lý lỗi nếu có
@@ -69,7 +75,32 @@ exports.uploadCard = (file) => {
       throw new Error('Error updating card.');
     }
   };
-
+exports.updateListCard = async (cardID,listImageCardUrl) => {
+  try{
+    const updateData = {
+      listImages: []
+    }
+    listImageCardUrl.forEach((imageUrl, index) => {
+      if(imageUrl)
+      {
+        updateData.listImages[index] = imageUrl
+      }
+    });
+    const updatedCard = await Card.findOneAndUpdate(
+      { id: cardInfo.id }, // Điều kiện tìm thẻ cần cập nhật (thay id bằng trường khóa chính của thẻ)
+      { $set: updateData }, // Dữ liệu cần cập nhật
+      { new: true } // Trả về thẻ đã cập nhật (nếu không có sẽ trả về thẻ trước khi cập nhật)
+    );
+  
+    // Trả về thông tin thẻ đã cập nhật
+    return updatedCard;
+  }
+  catch(error){
+    // Xử lý lỗi nếu có
+    console.error('Error updating card:', error);
+    throw new Error('Error updating card.');
+  }
+}
 exports.GetAllCards = async () => {
   try {
     const card = await Card.find();

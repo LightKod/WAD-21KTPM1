@@ -63,19 +63,55 @@ exports.CardAddPage = function (req, res, next) {
 exports.CardUpload = async function (req, res, next) {
   console.log(req.body);
   try {
-    if (!req.file) {
-      return res.status(400).send("No file uploaded.");
+    if (req.file) {
+      const file = req.file;
+      console.log(req.body);
+      // Sử dụng await để nhận URL trả về từ hàm uploadCard
+      const imageUrl = await cardService.uploadCard(file);
+      const updateCard = await cardService.updateCard(req.body, imageUrl);
+      // Trả về URL của tệp tin đã tải lên
+      console.log(updateCard);
+      res.status(200).send(imageUrl);
     }
-    const file = req.file;
-    console.log(req.body);
-    // Sử dụng await để nhận URL trả về từ hàm uploadCard
-    const imageUrl = await cardService.uploadCard(file);
-    const updateCard = await cardService.updateCard(req.body, imageUrl);
-    // Trả về URL của tệp tin đã tải lên
-    console.log(updateCard);
-    res.status(200).send(imageUrl);
+    else {
+      const updateCard = await cardService.updateCard(req.body, null);
+      res.status(200).send(updateCard);
+    }
+
   } catch (error) {
     console.error(error);
     res.status(500).send("Error uploading file.");
+  }
+};
+exports.ListCardUpdate = async function (req, res, next) {
+  try {
+    if (req.files && req.files.length > 0) {
+      const files = req.files;
+      console.log(files)
+      const listImageUrl = [];
+
+      // Duyệt qua từng file để tải lên và lưu URL vào listImageUrl
+      const imgStatus = req.body.imgStatus;
+
+      // Duyệt qua từng thuộc tính trong imgStatus để kiểm tra và xử lý tương ứng
+      for (let i = 1; i <= Object.keys(imgStatus).length; i++) {
+        const key = `image${i}`;
+        if (imgStatus[key] === true) {
+          const file = files[i - 1]; // Vị trí file tương ứng với key trong imgStatus
+          const imageUrl = await cardService.uploadCard(file);
+          listImageUrl.push(imageUrl);
+        } else {
+          listImageUrl.push(null);
+        }
+      }
+      // Ở đây, listImageUrl chứa các URL của các file đã được tải lên
+      const updateCard = await cardService.updateListCard(req.body.id, listImageUrl);
+      res.status(200).send("Files uploaded successfully", updateCard);
+    } else {
+      res.status(400).send("No files uploaded");
+    }
+  } catch (error) {
+    console.error(error);
+    res.status(500).send("Error uploading files.");
   }
 };

@@ -93,3 +93,7 @@ exports.updateProfile = async (userInfo, imageUrl) => {
     throw new Error('Error updating profile.');
   }
 };
+exports.getUserProfile= async (userId) => {
+  const user = await User.findOne({ id: userId })
+  return user
+}

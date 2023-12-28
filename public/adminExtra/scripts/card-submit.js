@@ -9,7 +9,10 @@ async function gatherAndPrintFormData(event) {
   event.preventDefault();
   // Create an object to store form data
   var formDataObject = {};
-
+  // imageFiles=[0,1,2]
+  // imageFiles.forEach((file, index) => {
+  //   formDataObject[`test${index + 1}`] = file;
+  // });
   // Get values from individual form elements by ID
   formDataObject.name = document.getElementById("cardName").value;
   formDataObject.id = document.getElementById("cardID").value;
@@ -44,14 +47,14 @@ async function gatherAndPrintFormData(event) {
   // Add timestamp with the Unix timestamp of the current time
   formDataObject.timestamp = Date.now();
   formDataObject.image = GetFile("input");
-  var images = [
-    GetFile("input"),
-    GetFile("input-1"),
-    GetFile("input-2"),
-    GetFile("input-3"),
-  ];
-  formDataObject.images = images;
-  console.log(formDataObject);
+  // var images = [
+  //   GetFile("input"),
+  //   GetFile("input-1"),
+  //   GetFile("input-2"),
+  //   GetFile("input-3"),
+  // ];
+  // formDataObject.images = images;
+  // console.log(formDataObject);
   PostData(formDataObject);
 }
 
@@ -96,11 +99,12 @@ function GetCurrentDate() {
 }
 function GetFile(inputId) {
   var fileInput = document.getElementById(inputId);
-
-  if (fileInput.files.length > 0) {
+  console.log(fileInput)
+  if (fileInput?.files.length > 0) {
     var file = fileInput.files[0];
     return file;
   } else {
+    console.log('bbbbbbbbbbbb')
     return null;
   }
 }

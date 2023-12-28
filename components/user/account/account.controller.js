@@ -13,10 +13,11 @@ exports.AccountPage = function (req, res, next) {
 };
 
 
-exports.AddressPage = function (req, res, next) {
+exports.AddressPage = async (req, res, next) =>{
   const scripts = ["/scripts/addresses.js"];
   const styles = ["/styles/account.css"];
-
+  const user= await AccountService.getUserProfile(req.user.id);  
+  console.log('aaaaaaaaa',user)
   res.render("user/address-page", {
     layout: "user/layouts/layout",
     title: "Addresses",
