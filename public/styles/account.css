@@ -324,6 +324,10 @@ p{
     font-family: 'DINPro-Medium', sans-serif;
 }
 
+.green-text{
+    color: #00A341 !important;
+}
+
 @media (max-width: 768px){
     .order-wrapper{
         grid-template-columns: 1fr 1fr 1fr;

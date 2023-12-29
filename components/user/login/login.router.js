@@ -1,10 +1,9 @@
 const express = require('express');
 const passport = require('passport');
 const router = express.Router();
+const controller = require('./login.controller')
 /* GET home page. */
-router.get('/', function (req, res, next) {
-  res.render('user/login-page');
-});
+router.get('/', controller.LoginPage);
 // router.post('/', passport.authenticate('local-login'), function (req, res, next) {
 //   console.log(req.user);
 //   res.redirect('/');

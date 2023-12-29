@@ -22,7 +22,7 @@ passport.use('local-signup', new LocalStrategy({
     // Kiểm tra xem email đã được sử dụng chưa
     User.findOne({ 'id': id }).then((user) => {
       if (user) {
-        return done(null, false, { message: 'Email đã tồn tại.' });
+        return done(null, false, { message: 'This email has already been registered' });
       } else {
         
         // Tạo người dùng mới và lưu vào cơ sở dữ liệu
@@ -56,17 +56,17 @@ passport.use('local-login', new LocalStrategy({
     User.findOne({ 'id': id }).then((user) => {
       if (!user) {
         console.log('Tài Khoảng không tồn tại.');
-        return done(null, false, { message: 'Tài Khoảng không tồn tại.' });
+        return done(null, false, { message: 'This account doen\'t exist' });
       }
       if (user?.password)
       {
         if (!bcrypt.compareSync(password, user.password)) {
-          return done(null, false, { message: 'Mật Khẩu không đúng.' });
+          return done(null, false, { message: 'Wrong password' });
         }
       }
       else
       {
-        return done(null, false, { message: 'Hãy đăng nhập nhanh với google mật khẩu chưa được thiết lập' });
+        return done(null, false, { message: 'This account\'s password hasn\'t been set. Please use quick sign in instead' });
       }
       console.log(user);
       return done(null, user);

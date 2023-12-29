@@ -1,3 +1,7 @@
+<%
+    const truncatedID = user.id.slice(0, 30) + '...';
+%>
+
 <main>
     <section>
         <div class="account-nav-wrapper">
@@ -16,41 +20,72 @@
                 <span class="title">Profile</span>
                 <div class="user-avatar">
                     <!-- Thay cái url bằng url avatar của user -->
-                    <div class="user-img" style="--_img_url: url('/images/user.jpg')"></div>
+                    <div class="user-img" <% if(user.avatar !== undefined) { %>style="--_img_url: url('<%= user.avatar %>')"<% } %>>
+                    </div>
                 </div>
                 <div class="user-profile-wrapper">
                     <div class="user-profile-tab">
-                        <div class="d-flex justify-content-between">
+                        <div class="d-flex justify-content-between align-items-center">
                             <span class="bold-text">User ID:</span>
-                            <span class="light-text">123456</span>
+                            <span class="light-text"><%= truncatedID %></span>
                         </div>
-                        <div class="d-flex justify-content-between">
+                        <div class="d-flex justify-content-between align-items-center">
                             <span class="bold-text">Email:</span>
-                            <span class="light-text">email@email.com</span>
+                            <span class="light-text"><%= user.email %></span>
                         </div>
-                        <div class="d-flex justify-content-between">
+                        <div class="d-flex justify-content-between align-items-center">
                             <span class="bold-text">Name:</span>
-                            <span class="light-text">Meo Meo Meo</span>
+                            <span class="light-text">
+                                <% if(user.name !== undefined) { %>
+                                    <%= user.name %>
+                                <% } else { %>
+                                    Not set
+                                <% } %>
+                            </span>
                         </div>
                     </div>
                     <div class="user-profile-tab">
-                        <div class="d-flex justify-content-between">
+                        <div class="d-flex justify-content-between align-items-center">
                             <span class="bold-text">Gender:</span>
-                            <span class="light-text">Unknown</span>
+                            <span class="light-text">
+                                <% if(user.gender !== undefined) { %>
+                                    <%= user.gender %>
+                                <% } else { %>
+                                    Not set
+                                <% } %>
+                            </span>
                         </div>
-                        <div class="d-flex justify-content-between">
+                        <div class="d-flex justify-content-between align-items-center">
                             <span class="bold-text">Date of birth:</span>
-                            <span class="light-text">DD/MM/YYYY</span>
+                            <span class="light-text">
+                                <% if(user.dob !== undefined) { %>
+                                    <%= user.dob %>
+                                <% } else { %>
+                                    Not set
+                                <% } %>
+                            </span>
                         </div>
-                        <div class="d-flex justify-content-between">
+                        <div class="d-flex justify-content-between align-items-center">
                             <span class="bold-text">Phone number:</span>
-                            <span class="light-text">0123456789</span>
+                            <span class="light-text">
+                                <% if(user.phone !== undefined) { %>
+                                    <%= user.phone %>
+                                <% } else { %>
+                                    Not set
+                                <% } %>
+                            </span>
                         </div>
                     </div>
                 </div>
                 <div class="hstack gap-4 justify-content-center">
                     <button type="button" class="black-btn" data-bs-toggle="offcanvas" data-bs-target="#editProfileOffcanvas" aria-controls="editProfileOffcanvas">Edit profile</button>
-                    <button type="button" class="black-btn" data-bs-toggle="offcanvas" data-bs-target="#changePasswordOffcanvas" aria-controls="changePasswordOffcanvas">Change password</button>
+                    <button type="button" class="black-btn" data-bs-toggle="offcanvas" data-bs-target="#changePasswordOffcanvas" aria-controls="changePasswordOffcanvas">
+                        <% if(user.password !== undefined) { %>
+                            Change password
+                        <% } else { %>
+                            Set password
+                        <% } %>
+                    </button>
                 </div>
             </div>
         </div>
@@ -260,50 +295,50 @@
         </div>
         <div class="offcanvas-body">
             <div class="vstack gap-4">
-                <form class="row g-3" action="/account/profile/update"  method="post">
+                <form class="row g-3" id="editProfileForm">
                     <div class="col-12">
                         <div class="form-floating">
-                            <input type="text" class="form-control" id="id" name="id" placeholder="User ID" value="1234546" readonly>
+                            <input type="text" class="form-control" id="id" name="id" placeholder="User ID" value="<%= user.id %>" readonly>
                             <label for="id">User ID</label>
                         </div>
                     </div>
                     <div class="col-12">
                         <div class="form-floating">
-                            <input type="text" class="form-control" id="email" name="email" placeholder="Email" value="email@email.com" readonly>
+                            <input type="text" class="form-control" id="email" name="email" placeholder="Email" value="<%= user.email %>" readonly>
                             <label for="email">Email</label>
                         </div>
                     </div>
                     <div class="col-12">
                         <div class="form-floating">
-                            <input type="text" class="form-control" id="name" name="name" placeholder="Name" required>
+                            <input type="text" class="form-control" id="name" name="name" placeholder="Name" value="<% if (user.name !== undefined) { %><%= user.name %><% } %>" required>
                             <label for="name">Name</label>
                         </div>
                     </div>
                     <div class="col-6">
                         <div class="form-floating">
                             <select class="form-select" id="gender" name="gender">
-                                <option value="Male">Male</option>
-                                <option value="Female">Female</option>
-                                <option value="Other">Other</option>
+                                <option value="Male" <% if (user.gender === "Male") { %>selected<% } %>>Male</option>
+                                <option value="Female" <% if (user.gender === "Female") { %>selected<% } %>>Female</option>
+                                <option value="Other" <% if (user.gender === "Other") { %>selected<% } %>>Other</option>
                             </select>
                             <label for="gender">Gender</label>
                         </div>
                     </div>
                     <div class="col-6">
                         <div class="form-floating">
-                            <input type="date" class="form-control" id="dob" name="dob" placeholder="Date of birth">
+                            <input type="date" class="form-control" id="dob" name="dob" placeholder="Date of birth" value="<% if (user.dob !== undefined) { %><%= user.dob %><% } %>">
                             <label for="dob">Date of birth</label>
                         </div>
                     </div>
                     <div class="col-12">
                         <div class="form-floating">
-                            <input type="text" class="form-control" id="phone" name="phone" placeholder="Phone number">
+                            <input type="text" class="form-control" id="phone" name="phone" placeholder="Phone number" value="<% if (user.phone !== undefined) { %><%= user.phone %><% } %>">
                             <label for="phone">Phone number</label>
                         </div>
                     </div>
                     <div class="col-12">
                         <div class="form-floating">
-                            <input type="file" class="form-control" id="avatar" name="avatar" placeholder="Avatar image" >
+                            <input type="file" class="form-control" id="avatar" name="avatar" placeholder="Avatar image">
                             <label for="avatar">Avatar image</label>
                         </div>
                     </div>
@@ -317,7 +352,13 @@
     <!-- Change Password Offcanvas -->
     <div class="offcanvas offcanvas-bottom" tabindex="-1" id="changePasswordOffcanvas" aria-labelledby="changePasswordOffcanvasLabel">
         <div class="offcanvas-header">
-            <h5 class="offcanvas-title" id="editProfileOffcanvasLabel">Change password</h5>
+            <h5 class="offcanvas-title" id="changePasswordOffcanvasLabel">
+                <% if(user.password !== undefined) { %>
+                    Change password
+                <% } else { %>
+                    Set a new password
+                <% } %>
+            </h5>
             <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
         </div>
         <div class="offcanvas-body">
@@ -326,10 +367,12 @@
                     <div id="changePasswordWarning" class="col-12">
                     </div>
                     <div class="col-12">
-                        <div class="form-floating">
-                            <input type="password" class="form-control" id="oldPassword" name="old_password" placeholder="Old password" required>
-                            <label for="oldPassword">Old password</label>
-                        </div>
+                        <% if(user.password !== undefined) { %>
+                            <div class="form-floating">
+                                <input type="password" class="form-control" id="oldPassword" name="old_password" placeholder="Old password" required>
+                                <label for="oldPassword">Old password</label>
+                            </div>
+                        <% } %>
                     </div>
                     <div class="col-12">
                         <div class="form-floating">
@@ -339,11 +382,17 @@
                     </div>
                     <div class="col-12">
                         <div class="form-floating">
-                            <input type="password" class="form-control" id="confirmPassword" name="confirm_password" placeholder="New password" required>
+                            <input type="password" class="form-control" id="confirmPassword" name="confirm_password" placeholder="Confirm new password" required>
                             <label for="confirmPassword">Confirm new password</label>
                         </div>
                     </div>
-                    <button type="submit" class="black-btn">Change password</button>
+                    <button type="submit" class="black-btn">
+                        <% if(user.password !== undefined) { %>
+                            Change password
+                        <% } else { %>
+                            Set password
+                        <% } %>
+                    </button>
                 </form>
             </div>
         </div>

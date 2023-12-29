@@ -14,7 +14,7 @@ router.post('/', function (req, res, next) {
     // Kiểm tra xem email đã được sử dụng chưa
     User.findOne({ 'id': id }).then((user) => {
       if (user) {
-        return res.status(400).send('Email đã tồn tại.');
+        return res.status(400).send('This email has already been registered');
       } else {
         
         // Tạo người dùng mới và lưu vào cơ sở dữ liệu

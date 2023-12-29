@@ -23,6 +23,7 @@ exports.AddressPage = async (req, res, next) =>{
     title: "Addresses",
     scripts: scripts,
     styles: styles,
+    user: user
   });
 };
 exports.changePassword = async  (req, res, next)=> {
