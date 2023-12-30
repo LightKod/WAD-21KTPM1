@@ -75,12 +75,10 @@ exports.CardUpload = async function (req, res, next) {
       // Trả về URL của tệp tin đã tải lên
       console.log(updateCard);
       res.status(200).send(imageUrl);
-    }
-    else {
+    } else {
       const updateCard = await cardService.updateCard(req.body, null);
       res.status(200).send(updateCard);
     }
-
   } catch (error) {
     console.error(error);
     res.status(500).send("Error uploading file.");
@@ -90,7 +88,7 @@ exports.ListCardUpdate = async function (req, res, next) {
   try {
     if (req.files && req.files.length > 0) {
       const files = req.files;
-      console.log(files)
+      console.log(files);
       const listImageUrl = [];
 
       // Duyệt qua từng file để tải lên và lưu URL vào listImageUrl
@@ -108,7 +106,10 @@ exports.ListCardUpdate = async function (req, res, next) {
         }
       }
       // Ở đây, listImageUrl chứa các URL của các file đã được tải lên
-      const updateCard = await cardService.updateListCard(req.body.id, listImageUrl);
+      const updateCard = await cardService.updateListCard(
+        req.body.id,
+        listImageUrl
+      );
       res.status(200).send("Files uploaded successfully", updateCard);
     } else {
       res.status(400).send("No files uploaded");

@@ -78,12 +78,27 @@ async function gatherAndPrintFormData(event) {
   multipleFormDataObj.image = createFileList(images);
   multipleFormDataObj.imgStatus = imgStatus;
   console.log(multipleFormDataObj);
-  //PostData(formDataObject);
+  PostData(formDataObject);
+  PostCardList(multipleFormDataObj);
 }
 
 function PostData(formDataObject) {
   formData = ToFormData(formDataObject);
   fetch("/admin/card/upload", {
+    method: "POST",
+    body: formData,
+  })
+    .then((data) => {
+      console.log("Success:", data);
+    })
+    .catch((error) => {
+      console.error("Error:", error);
+    });
+}
+
+function PostCardList(formDataObject) {
+  formData = ToFormData(formDataObject);
+  fetch("/admin/card/updateListCard", {
     method: "POST",
     body: formData,
   })
@@ -127,7 +142,6 @@ function GetFile(inputId) {
     var file = fileInput.files[0];
     return file;
   } else {
-    console.log("bbbbbbbbbbbb");
     return null;
   }
 }
