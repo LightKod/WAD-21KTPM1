@@ -29,6 +29,7 @@ var adminAuthRoute = require("./components/admin/auth/auth.router");
 var adminCardListRouter = require("./components/admin/card/card.router");
 var adminSetListRouter = require("./components/category/sets/sets.router");
 var adminUserListRouter = require("./components/admin/userManagement/user-management.router");
+var adminProfile = require("./components/admin/profile/profile.router");
 
 var accountRouter = require("./components/user/account/account.router");
 var ensureAuthenticated = require("./middleware/accountAuth");
@@ -69,6 +70,7 @@ app.use("/admin/card", adminCardListRouter);
 app.use("/admin/set", adminSetListRouter);
 app.use("/admin/card/edit", adminCardListRouter);
 app.use("/admin/user", adminUserListRouter);
+app.use("/admin/profile", checkAdminAuth, adminProfile);
 
 app.use("/", homeRouter);
 app.use("/products", productsRouter);
