@@ -64,7 +64,6 @@ exports.CardAddPage = function (req, res, next) {
 };
 
 exports.CardUpload = async function (req, res, next) {
-  console.log(req.body);
   try {
     if (req.file) {
       const file = req.file;
@@ -85,6 +84,7 @@ exports.CardUpload = async function (req, res, next) {
   }
 };
 exports.ListCardUpdate = async function (req, res, next) {
+  console.log(req.body);
   try {
     if (req.files && req.files.length > 0) {
       const files = req.files;
