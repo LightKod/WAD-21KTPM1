@@ -101,7 +101,7 @@ exports.ListCardUpdate = async function (req, res, next) {
 
         if (imgStatus[key] === true) {
           const file = files[fileIndex++]; // Vị trí file tương ứng với key trong imgStatus
-          const imageUrl = await cardService.uploadCard(file);
+          const imageUrl = await cardService.uploadCard(file,req.body.id);
           listImageUrl.push(imageUrl);
         } else {
           listImageUrl.push(null);

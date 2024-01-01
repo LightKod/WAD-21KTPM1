@@ -25,10 +25,10 @@ exports.changePassword = async (userId, oldPassword, newPassword) => {
     throw new Error('Error changing password: ' + error.message);
   }
 };
-exports.uploadAvatar = (file) => {
+exports.uploadAvatar = (file,id) => {
   return new Promise((resolve, reject) => {
     try {
-      const filepath = file.fieldname + '/' + file.originalname;
+      const filepath = file.fieldname +`/${id}`+ '/' + file.originalname;
       const blob = bucket.file(filepath);
       const blobStream = blob.createWriteStream({
         resumable: false,

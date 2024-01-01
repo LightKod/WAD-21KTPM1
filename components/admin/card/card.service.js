@@ -3,10 +3,10 @@ const Card = require("../../../models/Card");
 const admin = require("firebase-admin");
 
 const bucket = admin.storage().bucket();
-exports.uploadCard = (file) => {
+exports.uploadCard = (file,id) => {
   return new Promise((resolve, reject) => {
     try {
-      const filepath = file.fieldname + "/" + file.originalname;
+      const filepath = file.fieldname + `/${id}`+'/' + file.originalname;
       const blob = bucket.file(filepath);
       const blobStream = blob.createWriteStream({
         resumable: false,

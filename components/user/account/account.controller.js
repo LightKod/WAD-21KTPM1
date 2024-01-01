@@ -45,7 +45,7 @@ exports.updateProfile = async (req, res, next) => {
       const file = req.file;
       console.log(req.body);
       // Sử dụng await để nhận URL trả về từ hàm uploadCard
-      const imageUrl = await AccountService.uploadAvatar(file);
+      const imageUrl = await AccountService.uploadAvatar(file,req.body.id);
       const updateCard = await AccountService.updateProfile(req.body, imageUrl);
       // Trả về URL của tệp tin đã tải lên
       console.log(updateCard);

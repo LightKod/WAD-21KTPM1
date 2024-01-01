@@ -10,6 +10,7 @@ const userSchema = new mongoose.Schema({
     email: { type: String, required: true },
     password: { type: String},
     address: { type: Array},
+    dob: { type: String},
     role: { type: String, default: 'user' },
     created_at: { type: Date, default: Date.now },
     isBaned: { type: Boolean, default: false },
