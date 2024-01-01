@@ -65,7 +65,7 @@ async function gatherAndPrintFormData(event) {
   } else {
     imgStatus.image3 = false;
   }
-  newFormData.append("imgStatus", imgStatus);
+  newFormData.append("imgStatus", JSON.stringify(imgStatus)); // JSON.stringify(imgStatus);
   console.log(formData);
   console.log(newFormData);
   PostData(formData);

@@ -90,15 +90,17 @@ exports.ListCardUpdate = async function (req, res, next) {
       const files = req.files;
       console.log(files);
       const listImageUrl = [];
-
+      console.log(req.body.imgStatus);
       // Duyệt qua từng file để tải lên và lưu URL vào listImageUrl
-      const imgStatus = req.body.imgStatus;
-
+      const imgStatus = JSON.parse(req.body.imgStatus); // Chuỗi JSON chuyển đoreq.body.imgStatus;
+      let fileIndex=0
       // Duyệt qua từng thuộc tính trong imgStatus để kiểm tra và xử lý tương ứng
       for (let i = 1; i <= Object.keys(imgStatus).length; i++) {
         const key = `image${i}`;
+        console.log(`${key}: ${imgStatus[key]}`);
+
         if (imgStatus[key] === true) {
-          const file = files[i - 1]; // Vị trí file tương ứng với key trong imgStatus
+          const file = files[fileIndex++]; // Vị trí file tương ứng với key trong imgStatus
           const imageUrl = await cardService.uploadCard(file);
           listImageUrl.push(imageUrl);
         } else {
@@ -110,7 +112,7 @@ exports.ListCardUpdate = async function (req, res, next) {
         req.body.id,
         listImageUrl
       );
-      res.status(200).send("Files uploaded successfully", updateCard);
+      res.status(200).send("Files uploaded successfully");
     } else {
       res.status(400).send("No files uploaded");
     }

@@ -80,20 +80,15 @@ exports.updateCard = async (cardInfo, imageUrl) => {
 };
 exports.updateListCard = async (id, listImageCardUrl) => {
   try {
-    const updateData = {
-      listImages: [],
-    };
+    const updatedCard = await Card.findOne({ id: id });
+   
     listImageCardUrl.forEach((imageUrl, index) => {
-      if (imageUrl) {
-        updateData.listImages[index] = imageUrl;
+      if (listImageCardUrl[index]!= null && updatedCard.listImages[index] != imageUrl) {
+        updatedCard.listImages[index] = imageUrl;
       }
     });
-    const updatedCard = await Card.findOneAndUpdate(
-      { id: id }, // Điều kiện tìm thẻ cần cập nhật (thay id bằng trường khóa chính của thẻ)
-      { $set: updateData }, // Dữ liệu cần cập nhật
-      { new: true } // Trả về thẻ đã cập nhật (nếu không có sẽ trả về thẻ trước khi cập nhật)
-    );
-
+    
+    await updatedCard.save();
     // Trả về thông tin thẻ đã cập nhật
     return updatedCard;
   } catch (error) {
