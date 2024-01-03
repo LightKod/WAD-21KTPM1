@@ -452,7 +452,7 @@ function showProducts(data){
                     <a href="/products/detail/${item.id}">
                         <div class="card-name">${item.name}</div>
                     </a>
-                    <div class="card-price">${item.marketPrices}</div>
+                    <div class="card-price">${item.marketPrices}₫</div>
                 </div>
             </div>
         </div>`
