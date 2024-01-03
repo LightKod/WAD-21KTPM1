@@ -1,4 +1,7 @@
 const User = require('../../../models/User');
+const Order = require('../../../models/Order');
+const OrderDetail = require('../../../models/OrderDetail');
+const Card = require('../../../models/Card');
 const bcrypt = require('bcrypt');
 const admin = require('firebase-admin');
 
@@ -96,4 +99,39 @@ exports.updateProfile = async (userInfo, imageUrl) => {
 exports.getUserProfile= async (userId) => {
   const user = await User.findOne({ id: userId })
   return user
+}
+exports.getUserOrders = async (userId) => {
+  const orders = await Order.find({
+    $and: [
+      {userId: userId},
+      {status: {
+        $ne: "unpaid"
+      }}
+    ]
+  })
+  return orders
+}
+exports.getUserOrderDetail = async (orderId) => {
+  const order = await Order.findOne({id: orderId})
+  const orderDetails = await OrderDetail.find({orderId: orderId})
+
+  const order_detail = {
+    order_id: order.id,
+    order_status: order.status,
+    order_date: order.orderDate,
+    total_price: order.totalPrice,
+    items: []
+  }
+
+  for (const item of orderDetails) {
+    const card = await Card.findOne({id: item.cardId})
+    const product = {
+      card : card,
+      quantity: item.quantity,
+      price: item.totalPrice
+    }
+    order_detail.items.push(product)
+  }
+
+  return order_detail
 }
