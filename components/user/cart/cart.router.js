@@ -5,6 +5,7 @@ const controller = require('./card.controller')
 const Cart = require('../../../models/Cart');
 const Order = require('../../../models/Order');
 const OrderDetail = require('../../../models/OrderDetail');
+const { response } = require('../../../app');
 /* GET home page. */
 router.get('/', controller.CartPage);
 router.post('/add-to-cart', async (req, res) => {
@@ -112,7 +113,9 @@ router.post('/checkout', async (req, res) => {
       // Đợi cho tất cả các chi tiết đơn hàng được lưu
       await Promise.all(orderDetailPromises);
   
-      res.status(201).json({ message: 'Checkout successful' });
+      const responseUrl = `/payment/${orderID}`
+      console.log(responseUrl)
+      res.status(201).redirect(responseUrl)
     } catch (error) {
       res.status(500).json({ error: error.message });
     }

@@ -1,19 +1,47 @@
 const express = require('express');
 const router = express.Router();
 const controller = require('./payment.controler')
+
+//Chuyển đống này qua controller 😺
+const Order = require('../../../models/Order');
+const OrderDetail = require('../../../models/OrderDetail');
+const Card = require('../../../models/Card');
+
+
 // let $ = require('jquery');
 // const request = require('request');
 const moment = require('moment');
 /* GET home page. */
-router.get('/', function (req, res, next) {
-    const scripts = ["/scripts/landing-page.js"];
+router.get('/:id', async (req, res, next) => {
+    const scripts = ["/scripts/checkout.js"];
     const styles = ["/styles/checkout.css"];
+
+    const orderId = req.params.id
+
+    const order = await Order.findOne({id: orderId})
+    const orderDetails = await OrderDetail.find({orderId: orderId})
+
+    const bill_detail = {
+        total_price: order.totalPrice,
+        bill_items: []
+    }
+
+    for (const item of orderDetails) {
+        const card = await Card.findOne({id: item.cardId})
+        const product = {
+          card : card,
+          quantity: item.quantity,
+          price: item.totalPrice
+        }
+        bill_detail.bill_items.push(product)
+    }
+    
     res.render("user/checkout", {
       layout: "user/layouts/layout",
-      title: "TCG - Trading Card Game Store",
+      title: "Checkout",
       scripts: scripts,
-      styles: styles,})
-
+      styles: styles,
+      bill_detail: bill_detail})
     });
 function sortObject(obj) {
 	let sorted = {};
@@ -87,7 +115,7 @@ router.post('/create_payment_url', function (req, res, next) {
     vnp_Params['vnp_SecureHash'] = signed;
     vnpUrl += '?' + querystring.stringify(vnp_Params, { encode: false });
     console.log(vnpUrl)
-    res.redirect(vnpUrl)
+    res.status(201).json({link: vnpUrl})
 });
 
 router.get('/vnpay_return', function (req, res, next) {
