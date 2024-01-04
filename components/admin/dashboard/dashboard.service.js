@@ -91,9 +91,29 @@ exports.GetTodayOrder = async function () {
   }
 };
 
-exports.GetTopRevenue = async function () {
+exports.GetTopRevenue = async function (days) {
   try {
     const top10Cards = await OrderDetail.aggregate([
+      {
+        $lookup: {
+          from: "orders",
+          localField: "orderId",
+          foreignField: "id",
+          as: "orderInfo",
+        },
+      },
+      {
+        $unwind: "$orderInfo",
+      },
+
+      {
+        $match: {
+          "orderInfo.orderDate": {
+            $gte: new Date(new Date() - days * 24 * 60 * 60 * 1000),
+          },
+        },
+      },
+
       {
         $group: {
           _id: "$cardId",
@@ -110,8 +130,8 @@ exports.GetTopRevenue = async function () {
       {
         $lookup: {
           from: "cards",
-          localField: "_id", // Use "_id" instead of "id" as it corresponds to cardId
-          foreignField: "id", // Match with the "id" field in the Card collection
+          localField: "_id",
+          foreignField: "id",
           as: "cardInfo",
         },
       },
@@ -123,7 +143,7 @@ exports.GetTopRevenue = async function () {
           cardId: "$_id",
           cardName: "$cardInfo.name",
           setId: "$cardInfo.setId",
-          Price: "$cardInfo.marketPrices", // Assuming marketPrices is the correct field
+          Price: "$cardInfo.marketPrices",
           amount: "$totalQuantity",
           totalRevenue: "$totalRevenue",
         },
@@ -137,9 +157,28 @@ exports.GetTopRevenue = async function () {
   }
 };
 
-exports.GetTopSetRevenue = async function () {
+exports.GetTopSetRevenue = async function (days) {
   try {
+    const currentDate = new Date();
+    const pastDay = new Date(currentDate - days * 24 * 60 * 60 * 1000);
+
     const top4Sets = await OrderDetail.aggregate([
+      {
+        $lookup: {
+          from: "orders",
+          localField: "orderId",
+          foreignField: "id",
+          as: "orderInfo",
+        },
+      },
+      {
+        $unwind: "$orderInfo",
+      },
+      {
+        $match: {
+          "orderInfo.orderDate": { $gte: pastDay, $lte: currentDate },
+        },
+      },
       {
         $lookup: {
           from: "cards",
@@ -164,10 +203,14 @@ exports.GetTopSetRevenue = async function () {
         $limit: 4,
       },
     ]);
+
     return top4Sets;
   } catch (error) {
     // Handle errors
-    console.error("Error fetching top 4 sets:", error);
+    console.error(
+      `Error fetching top 4 sets for the last ${days} days:`,
+      error
+    );
     throw error;
   }
 };

@@ -8,10 +8,9 @@ exports.DashboardPage = async function (req, res, next) {
     "/admin/js/demo/chart-pie-demo.js",
     "/adminExtra/scripts/dashboard.js",
   ];
-  const data = await service.GetEarning(14);
-  const topRevenue = await service.GetTopRevenue();
+  const topRevenue = await service.GetTopRevenue(14);
   const setRevenues = await service.GetTopSetRevenue();
-  console.log(setRevenues);
+  console.log(topRevenue);
   res.render("admin/dashboard", {
     layout: "admin/layouts/layout",
     title: "Dashboard",
@@ -87,8 +86,20 @@ exports.GetTodayOrder = async function (req, res, next) {
 
 exports.GetTopSetRevenue = async function (req, res, next) {
   try {
-    const topSets = await service.GetTopSetRevenue();
+    const day = req.params.days || 14;
+    const topSets = await service.GetTopSetRevenue(day);
     res.json(topSets);
+  } catch (error) {
+    res.status(500).json({ error: "Internal Server Error" });
+  }
+};
+
+exports.GetTopRevenue = async function (req, res, next) {
+  try {
+    const day = req.params.days || 14;
+    const topRev = await service.GetTopRevenue(day);
+    console.log(topRev);
+    res.json(topRev);
   } catch (error) {
     res.status(500).json({ error: "Internal Server Error" });
   }
