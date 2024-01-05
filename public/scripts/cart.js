@@ -64,24 +64,24 @@ quantitySelectors.forEach((item, i) => {
 
 function removeCartItem(id) {
     console.log("unimplemented")
-    // formBody = {}
+    formBody = {}
 
-    // formBody['productId'] = id
-    // formBody['quantity'] = 0
-    // formBody['price'] = 0
+    formBody['productId'] = id
+    formBody['quantity'] = 0
+    formBody['price'] = 0
 
-    // fetch("/cart/update-cart-item", {
-    //     method: "PUT",
-    //     headers: {
-    //         'Content-type': 'application/json; charset=UTF-8'
-    //     },
-    //     body: JSON.stringify(formBody)
-    // })
-    // .then(response => {
-    //     if(response.ok){
-    //         window.location.reload(true);
-    //     }
-    // })
+    fetch("/cart/update-cart-item", {
+        method: "PUT",
+        headers: {
+            'Content-type': 'application/json; charset=UTF-8'
+        },
+        body: JSON.stringify(formBody)
+    })
+    .then(response => {
+        if(response.ok){
+            window.location.reload(true);
+        }
+    })
 }
 
 const checkoutForm = document.getElementById('checkoutForm')
