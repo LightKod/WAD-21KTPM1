@@ -14,7 +14,9 @@ const userSchema = new mongoose.Schema({
     role: { type: String, default: 'user' },
     created_at: { type: Date, default: Date.now },
     isBaned: { type: Boolean, default: false },
-
+    emailVerified : { type: Boolean, default: false },
+    emailVerificationToken : { type: String },
+    emailVerificationExpires : { type: Number  }
   });
 
 const User = mongoose.model('User', userSchema);
