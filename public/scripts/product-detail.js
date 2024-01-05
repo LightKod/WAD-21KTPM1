@@ -61,35 +61,37 @@ const fetchReviews = () => {
 
 
 
+if(reviewForm !== null){
+    reviewForm.addEventListener('submit', (e) => {
+        e.preventDefault()
+        const formData = new FormData(reviewForm)
+        const data = Object.fromEntries(formData.entries())
+        const url = window.location.href;
+        const segments = url.split('/'); // Tách URL thành các phần dựa trên dấu '/'
+        const lastSegment = segments[segments.length - 1]; // Lấy phần tử cuối cùng
+        console.log(lastSegment);
+        console.log(data)
+        fetch(`/products/detail/${lastSegment}`, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(data)
+        })
+        .then(res => {
+            if (!res.ok) {
+                throw new Error('Network response was not ok');
+            }
+            fetchReviews()
+        })
+        .catch(error => {
+            console.error('Error:', error);
+        })
+        detailsElement.removeAttribute('open');
+    
+    })
+}
 
-reviewForm.addEventListener('submit', (e) => {
-    e.preventDefault()
-    const formData = new FormData(reviewForm)
-    const data = Object.fromEntries(formData.entries())
-    const url = window.location.href;
-    const segments = url.split('/'); // Tách URL thành các phần dựa trên dấu '/'
-    const lastSegment = segments[segments.length - 1]; // Lấy phần tử cuối cùng
-    console.log(lastSegment);
-    console.log(data)
-    fetch(`/products/detail/${lastSegment}`, {
-        method: 'POST',
-        headers: {
-            'Content-Type': 'application/json'
-        },
-        body: JSON.stringify(data)
-    })
-    .then(res => {
-        if (!res.ok) {
-            throw new Error('Network response was not ok');
-        }
-        fetchReviews()
-    })
-    .catch(error => {
-        console.error('Error:', error);
-    })
-    detailsElement.removeAttribute('open');
-
-})
 window.addEventListener("load", (e) => {
     fetchReviews()
 })
