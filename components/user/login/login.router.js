@@ -4,6 +4,9 @@ const router = express.Router();
 const controller = require('./login.controller')
 /* GET home page. */
 router.get('/', controller.LoginPage);
+
+/* GET forget password page */
+router.get('/forget-password', controller.ForgetPasswordPage);
 // router.post('/', passport.authenticate('local-login'), function (req, res, next) {
 //   console.log(req.user);
 //   res.redirect('/');
