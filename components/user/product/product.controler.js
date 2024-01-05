@@ -37,6 +37,7 @@ exports.getProductsBySearch = async (req, res,next) => {
 }
 exports.getProductDetail = async (req, res,next) => {
     const id = req.params.id;
+    const hasLoggedIn = req.user?.id === undefined ? false : true
     const card = await ProductService.getProductsDetail(id);
     const scripts = [
       '/scripts/product-detail.js',
@@ -53,7 +54,8 @@ exports.getProductDetail = async (req, res,next) => {
       scripts: scripts,
       styles: styles,
       product: card.cardInfo,
-      relatedCards: card.relatedCard
+      relatedCards: card.relatedCard,
+      hasLoggedIn: hasLoggedIn
     });
   }
 exports.postReview = async (req, res,next) => {

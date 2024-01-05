@@ -83,6 +83,9 @@ body{
     height: 50px;
     border: none;
     background: none;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 
 .quantity-btn-group .plus-btn{
@@ -90,6 +93,9 @@ body{
     height: 50px;
     border: none;
     background: none;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 
 .quantity-btn-group .quantity{

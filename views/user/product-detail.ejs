@@ -164,7 +164,7 @@
     </div>
   </section>
 
-  <section>
+  <!-- <section>
     <div class="section-wrapper vstack gap-5">
       <div class="heading hstack">
         <span class="heading-title scroll-reveal"
@@ -330,7 +330,7 @@
         </div>
       </div>
     </div>
-  </section>
+  </section> -->
 
   <!-- REVIEW -->
   <section>
@@ -338,6 +338,7 @@
         <div class="heading">
             <span class="heading-title">Customer Reviews</span>
         </div>
+    <% if(hasLoggedIn) { %>
     <details class="mt-5">
         <summary>
             Write a review
@@ -358,6 +359,7 @@
             <button type="submit" class="pink-btn">Submit review</button>
         </form>
     </div>
+    <% } %>
     <div class="user-review-wrapper" id="userReviews">
         
     </div>
