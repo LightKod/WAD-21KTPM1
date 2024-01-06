@@ -77,3 +77,23 @@ exports.getOrderDetail = async (req, res, next) => {
 
   res.status(200).json(order_detail)
 }
+exports.AddressUserAdd = async (req, res, next) => {
+ try {
+  const userId = req.user.id;
+  const address = req.body;
+  const result = await AccountService.addUserAddress(userId, address);
+  return res.status(200).json(result);
+ } catch (error) {
+  return res.status(400).json({ message: 'Error changing password: ' + error.message });
+ }
+}
+exports.AddressUserUpdate = async (req, res, next) => {
+ try {
+  const userId = req.user.id;
+  const address = req.body;
+  const result = await AccountService.updateUserAddress(userId, address);
+  return res.status(200).json(result);
+ } catch (error) {
+  return res.status(400).json({ message: 'Error changing password: ' + error.message });
+ }
+}
