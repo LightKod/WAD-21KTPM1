@@ -11,6 +11,7 @@ router.get('/', controller.AccountPage);
 router.get('/addresses', controller.AddressPage);  
 router.post('/address/update', controller.AddressUserUpdate);
 router.post('/address/add', controller.AddressUserAdd);
+router.get('/get-address-detail/:id', controller.getAddressDetail)
 router.get('/get-order-detail/:id', controller.getOrderDetail)
 router.post('/password/update', controller.changePassword);
 router.post('/profile/update',multerUpload.single("avatar"),controller.updateProfile);

@@ -155,3 +155,18 @@ exports.updateUserAddress = async (userId, updateAddress) => {
 
   return user
 }
+exports.getUserAddresses = async(userId) => {
+  const user = await User.findOne({id: userId})
+  const addresses = user.address
+  return addresses
+}
+exports.getUserAddressDetail = async(userId, addressId) => {
+  const user = await User.findOne({id: userId}) 
+  var address_detail = {}
+  user.address.forEach((address, index) => {
+    if (address.id === addressId) {
+      address_detail = user.address[index]
+    }
+  })
+  return address_detail
+}
