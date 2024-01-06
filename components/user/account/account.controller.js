@@ -28,7 +28,7 @@ exports.AddressPage = async (req, res, next) =>{
   console.log('aaaaaaaaa',user)
   res.render("user/address-page", {
     layout: "user/layouts/layout",
-    title: "Addresses",
+    title: "Profile",
     scripts: scripts,
     styles: styles,
     user: user

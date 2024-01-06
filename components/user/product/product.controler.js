@@ -50,7 +50,7 @@ exports.getProductDetail = async (req, res,next) => {
     res.render('user/product-detail', 
     {
       layout: 'user/layouts/layout', 
-      title: "Your Shopping Cart",
+      title: `${card.cardInfo.name}`,
       scripts: scripts,
       styles: styles,
       product: card.cardInfo,
@@ -75,7 +75,7 @@ exports.productExample = async (req, res,next) => {
 }
 exports.productsPage = async (req, res,next) => {
   res.render('user/product-page-new', {
-    title: "product page new",
+    title: "All products",
     layout: 'user/layouts/layout',
     scripts:['/scripts/product.js'],
     styles:['/styles/product-new.css']
