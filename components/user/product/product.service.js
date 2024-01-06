@@ -132,13 +132,23 @@ exports.postReview = async (id, review) => {
     throw new Error('Error fetching filtered products from database: ' + error.message);
   }
 }
-exports.getReviews = async (id) => {
+exports.getReviews = async (id, page, perPage = 5) => {
   try {
     const card = await Card.findOne({ id: id });
     if (!card) {
       return res.status(404).json({ message: 'Card not found' });
     }
-    return card.reviews;
+    const allReviews = card.reviews;
+    const skip = (page - 1) * perPage;
+    const filteredReviews = allReviews.slice(skip, skip + perPage);
+
+    const totalReviews = allReviews.length;
+    const totalPages = Math.ceil(totalReviews / perPage);
+
+    return {
+      reviews: filteredReviews,
+      totalPages: totalPages,
+    };
   }
   catch (error) {
     throw new Error('Error fetching filtered products from database: ' + error.message);

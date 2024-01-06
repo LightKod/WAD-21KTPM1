@@ -112,6 +112,7 @@ exports.filtersBar = async (req, res,next) => {
 }
 exports.ListReviews = async (req, res,next) => {
   const id = req.params.id;
-  const reviews = await ProductService.getReviews(id);
-  res.status(200).send(reviews);
+  const page = req.query.page;
+  const filteredReviews = await ProductService.getReviews(id, page);
+  res.status(200).send(filteredReviews);
 }
