@@ -21,7 +21,7 @@ forgetPasswordForm.addEventListener('submit', (e) => {
 })
 
 function submitForm(){
-    fetch('/account/password/forget', {
+    fetch('/login/forget-password', {
         method: "POST",
         body: JSON.stringify({
             email: email

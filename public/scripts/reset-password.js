@@ -58,12 +58,18 @@ resetPasswordForm.addEventListener('submit', (e) => {
     else{
         changePasswordWarning.style.display = "none"
         
-        formBody = {}
-        formBody['new_password'] = new_password
+       
+        const currentURL = window.location.href;
 
-        fetch("/account/password/reset", {
+        // Phân tích URL để lấy token
+        const parts = currentURL.split('/');
+        const token = parts[parts.length - 1];
+        fetch("/login/reset-password", {
             method: "POST",
-            body: JSON.stringify(formBody),
+            body: JSON.stringify({
+                token: token,
+                newPassword: new_password
+            }),
             headers: {
                 "Content-type": "application/json; charset=UTF-8"
             }

@@ -7,6 +7,7 @@ router.get('/', controller.LoginPage);
 
 /* GET forget password page */
 router.get('/forget-password', controller.ForgetPasswordPage);
+router.get('/reset-password/:token', controller.ResetPasswordPage);
 // router.post('/', passport.authenticate('local-login'), function (req, res, next) {
 //   console.log(req.user);
 //   res.redirect('/');
@@ -34,4 +35,6 @@ router.get('/oauth2/redirect/google', passport.authenticate('google', {
   successRedirect: '/account',
   failureRedirect: '/login'
 }));
+router.post('/forget-password', controller.ForgetPassword);
+router.post('/reset-password', controller.ResetPassword);
 module.exports = router;
