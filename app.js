@@ -66,12 +66,12 @@ require("./config/passportConfig");
 
 //TODO: Add admin auth middlewarre cho mấy cái dưới lúc nộp
 app.use("/admin", adminAuthRoute);
-app.use("/admin/dashboard", adminDashboardRouter);
-app.use("/admin/card", adminCardListRouter);
-app.use("/admin/set", adminSetListRouter);
-app.use("/admin/card/edit", adminCardListRouter);
-app.use("/admin/user", adminUserListRouter);
-app.use("/admin/order", adminOrderListRouter);
+app.use("/admin/dashboard", checkAdminAuth, adminDashboardRouter);
+app.use("/admin/card", checkAdminAuth, adminCardListRouter);
+app.use("/admin/set", checkAdminAuth, adminSetListRouter);
+app.use("/admin/card/edit", checkAdminAuth, adminCardListRouter);
+app.use("/admin/user", checkAdminAuth, adminUserListRouter);
+app.use("/admin/order", checkAdminAuth, adminOrderListRouter);
 app.use("/admin/profile", checkAdminAuth, adminProfile);
 
 app.use("/", homeRouter);

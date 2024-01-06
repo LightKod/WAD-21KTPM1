@@ -37,7 +37,7 @@ async function gatherAndPrintFormData(event) {
   formData.append("timestamp", Date.now());
   formData.append("image", GetFile("fileInput"));
 
-  var result = CheckValidInput(formData);
+  var result = await CheckValidInput(formData);
   if (result != null) {
     displayErrorModal("Error", result);
     return;
@@ -45,6 +45,7 @@ async function gatherAndPrintFormData(event) {
 
   var newFormData = new FormData();
   newFormData.append("id", document.getElementById("cardID").value);
+
   var imgStatus = {};
   var img_1 = GetFile("fileInput-1");
   var img_2 = GetFile("fileInput-2");
@@ -70,16 +71,25 @@ async function gatherAndPrintFormData(event) {
     imgStatus.image3 = false;
   }
   newFormData.append("imgStatus", JSON.stringify(imgStatus)); // JSON.stringify(imgStatus);
+  console.log(formData);
+  console.log(newFormData);
   PostData(formData);
   if (newFormData.get("image") != null) {
     PostCardList(newFormData);
   }
-  window.location.href = "/admin/card";
+  //window.location.href = "/admin/card";
 }
 
-function CheckValidInput(formData) {
+async function CheckValidInput(formData) {
   const amount = Number(formData.get("amount"));
   const marketPrices = Number(formData.get("marketPrices"));
+  const cardId = formData.get("id");
+
+  // Check if the card with the given ID already exists
+  const existingCard = await GetCard(cardId);
+  if (existingCard != "\0") {
+    return "Card with this ID already exists";
+  }
 
   if (typeof amount !== "number" || !Number.isInteger(amount) || amount <= 0) {
     return "Amount is not a valid positive integer";
@@ -117,6 +127,25 @@ function PostCardList(formDataObject) {
     .catch((error) => {
       console.error("Error:", error);
     });
+}
+
+async function GetCard(cardId) {
+  try {
+    const apiUrl = `/admin/card/get/${cardId}`;
+    const response = await fetch(apiUrl);
+
+    if (!response.ok) {
+      throw new Error(
+        `Failed to fetch card with ID ${cardId}. Status code: ${response.status}`
+      );
+    }
+
+    const cardData = await response.json();
+    return cardData;
+  } catch (error) {
+    console.error("Error fetching card:", error.message);
+    throw new Error("Error fetching card.");
+  }
 }
 
 function GetCurrentDate() {
