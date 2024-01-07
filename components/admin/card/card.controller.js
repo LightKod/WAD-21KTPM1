@@ -197,3 +197,14 @@ exports.GetCard = async function (req, res, next) {
     res.status(500).json({ error: "Internal Server Error" });
   }
 };
+exports.DeleteListImages = async function (req, res, next) {
+  const CardId = req.body.cardId
+  const ListImagesDelete = req.body.deleteImgStatus
+  try {
+    const card = await cardService.DeleteListImages(CardId,ListImagesDelete);
+    res.status(200).json(card);
+  } catch (error) {
+    console.error(error);
+    res.status(500).send("Error deleting images.");
+  }
+}

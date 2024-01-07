@@ -194,3 +194,17 @@ exports.DeleteCard = async (cardId) => {
     throw error;
   }
 };
+exports.DeleteListImages = async (cardId,ListImagesDelete) => {
+ try {
+  const result =await Card.findOne({ id: cardId });
+  ListImagesDelete.forEach((imageDelete, index) => {
+    if(imageDelete)
+    {
+      result.listImages[index] = ""
+    }
+  })
+  } catch (error) {
+    console.error("Error deleting card:", error);
+    throw error;
+  }
+}
